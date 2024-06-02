@@ -1,13 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import LabelInput from './assets/components/LabelInput.tsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "bootstrap/dist/css/bootstrap.css";
+import NewUserPanel from "./components/NewUserPanel.tsx";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <LabelInput label="Name" />
-    <LabelInput label="Name" />
-    <LabelInput label="Name" />
-    <LabelInput label="Name" />
-  </React.StrictMode>,
-)
+ReactDOM.createRoot(document.getElementById("root")!).render(
+	<React.StrictMode>
+		<NewUserPanel />
+	</React.StrictMode>
+);
