@@ -65,8 +65,9 @@ function NewOrganizationPanel() {
 					onClick={() => {
 						let requestBody: { [key: string]: string } = {};
 						for (let parameter of parameters) {
-							requestBody[parameter.toLowerCase()] =
-								MyStates[parameter][0];
+							requestBody[
+								parameter.replace(" ", "_").toLowerCase()
+							] = MyStates[parameter][0];
 						}
 						let url =
 							"http://localhost:8080/api/organization/newOrganization";
