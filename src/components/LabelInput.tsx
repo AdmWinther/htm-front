@@ -12,7 +12,11 @@ function LabelInput(props: {
 			</label>
 			<input
 				key={props.parameter}
-				type={props.parameter === "Password" ? "password" : "text"}
+				type={
+					props.parameter.toLowerCase() === "password"
+						? "password"
+						: "text"
+				}
 				id={props.parameter}
 				className="form-control"
 				placeholder={props.parameter}

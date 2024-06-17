@@ -9,7 +9,10 @@ function NewUserPanel() {
 			{parameters.map((parameter) => {
 				return (
 					<div key={parameter}>
-						<LabelInput parameter={parameter} />
+						<LabelInput
+							parameter={parameter}
+							onChange={(e) => console.log(e)}
+						/>
 					</div>
 				);
 			})}
