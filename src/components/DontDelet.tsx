@@ -23,7 +23,7 @@ function NewUserPanel() {
 					className="btn btn-primary"
 					type="button"
 					onClick={() => {
-						let url = "http://localhost:8080/api/user/getAll";
+						let url = "http://localhost:8080/api/user/newUser";
 						fetch(url)
 							.then((response) => {
 								return response.json();
