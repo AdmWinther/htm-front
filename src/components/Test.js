@@ -1,5 +1,6 @@
 import React from 'react';
 import getCsrfToken from '../services/csrfTokenService';
+import { Link } from 'react-router-dom';
 function Test() {
 
     //make a state to store the version
@@ -46,8 +47,10 @@ function Test() {
 
     return (
         <div>
+            <Link to="/">Home</Link>
+            <br/>
             <button onClick={fetchDataGet}> Click-Get </button>
-            <br></br>
+            <br/>
             <button onClick={fetchDataPost}> Click-Post </button>
             <h1>{version}</h1>
         </div>

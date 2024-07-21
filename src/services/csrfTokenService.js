@@ -1,6 +1,6 @@
 function getCsrfToken() {
     return new Promise((resolve, reject) => {
-        fetch('http://localhost:8080/root/test', { method: 'GET', credentials: 'include', mode: 'cors'})
+        fetch('http://localhost:8080/login', { method: 'GET', credentials: 'include', mode: 'cors'})
         .then(response => {
             const headersObj = {};
             response.headers.forEach((value, name) => {

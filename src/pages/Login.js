@@ -8,25 +8,36 @@ const LoginForm = () => {
     const handleLogin = () => {
         getCsrfToken()
         .then((token) => {
-            let data = { username: username, password: password };
+            const formData = new URLSearchParams();
+            formData.append('username', username);
+            formData.append('password', password);
             // Perform your login action here (e.g., sending a post request to the backend)
             fetch('http://localhost:8080/login', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+                    'Content-Type': 'application/x-www-form-urlencoded',
                     'X-XSRF-TOKEN': token // Include the CSRF token in the header
                 },
                 credentials: 'include', // Ensure cookies are sent with the request
-                body: JSON.stringify(data)
+                body: formData // Send the form data
             })
             .then(response => {
                 console.log(response);
                 return response;
                 // Handle response from the backend
             })
-            .then(data => {
-                // Handle data from the backend
-                console.log(data);
+            .then(response => {
+                const headersObj = {};
+                response.headers.forEach((value, name) => {
+                    headersObj[name] = value;
+                });
+                console.log('headersObj');
+                console.log(headersObj);
+                
+                console.log('response');
+                console.log(response.url);
+                window.location.href = response.url;
             })
             .catch(error => {
                 // Handle error

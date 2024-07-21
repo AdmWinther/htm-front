@@ -8,6 +8,8 @@ function Home() {
             <Link to="/contact">Contact Info</Link>
             <br />
             <Link to="/login">Login</Link>
+            <br />
+            <Link to="/test">Test</Link>
         </div>
     )
 }
