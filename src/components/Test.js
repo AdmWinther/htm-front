@@ -1,5 +1,5 @@
 import React from 'react';
-import getCsrfToken from '../services/csrfTokenService';
+import getCsrfToken from '../services/getCsrfToken';
 import { Link } from 'react-router-dom';
 function Test() {
 
