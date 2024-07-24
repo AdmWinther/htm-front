@@ -12,14 +12,16 @@ import Test from './components/Test';
 
 function App() {
   return (
-    <Router>
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/contact" element={<ContactInfo />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/test" element={<Test />} />
-        </Routes>
-    </Router>
+    <div style={{ height: '100vh' }}>
+        <Router>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/contact" element={<ContactInfo />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/test" element={<Test />} />
+            </Routes>
+        </Router>
+    </div>
   );
 }
 

@@ -1,53 +1,33 @@
 import React, { useState } from 'react';
-// import getCsrfToken  from '../services/getCsrfToken';
+import "bootstrap/dist/css/bootstrap.min.css";
 import postRequestMaker from '../services/postRequestMaker';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [children, setChildren] = useState(null);
 
     const handleLogin = () => {
-        // getCsrfToken()
-        // .then((token) => {
-        //     const formData = new URLSearchParams();
-        //     formData.append('username', username);
-        //     formData.append('password', password);
-        //     // Perform your login action here (e.g., sending a post request to the backend)
-        //     fetch('http://localhost:8080/login', {
-        //         method: 'POST',
-        //         headers: {
-        //             'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
-        //             'Content-Type': 'application/x-www-form-urlencoded',
-        //             'X-XSRF-TOKEN': token // Include the CSRF token in the header
-        //         },
-        //         credentials: 'include', // Ensure cookies are sent with the request
-        //         body: formData // Send the form data
-        //     })
-        //     .then(response => {
-        //         console.log(response);
-        //         return response;
-        //         // Handle response from the backend
-        //     })
-        //     .then(response => {
-        //         const headersObj = {};
-        //         response.headers.forEach((value, name) => {
-        //             headersObj[name] = value;
-        //         });
-        //         console.log('headersObj');
-        //         console.log(headersObj);
-                
-        //         console.log('response');
-        //         console.log(response.url);
-        //         window.location.href = response.url;
-        //     })
-        //     .catch(error => {
-        //         // Handle error
-        //         console.error('Error:', error);
-        //     });
-        // })
         postRequestMaker('http://localhost:8080/login', {username: username, password: password})
         .then(response => {
-            window.location.href = response.url;
+            if(response.status === 401) {
+                setChildren(
+                    <div>
+                        
+
+                        <p style={{color: "red"}}>"Bad Credentials"</p>
+
+
+                    </div>
+
+                );
+            } else if(response.status === 200) {
+                window.location.href = response.url;
+            } else {
+                setChildren(
+                    <p style={{color: "red"}}>"Server Error"</p>
+                );
+            }
             // Handle response from the backend
         })
     }
@@ -59,29 +39,32 @@ const LoginForm = () => {
     };
     
     return (
-        <div>
-            <div>
-                <label htmlFor="username">Username:</label>
-                <input
-                type="text"
-                id="username"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
-                onKeyPress={handleKeyPress}
-                />
+        <div className="h-100 d-flex justify-content-center align-items-center" >
+            <div className="h-auto">
+                <div className="mb-3">
+                    <label className="form-label" htmlFor="username">Username:</label>
+                    <input className="form-control"
+                    // type="text"
+                    id="username"
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
+                    onKeyDown={handleKeyPress}
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label" htmlFor="password">Password:</label>
+                    <input className="form-control"
+                    type="password"
+                    id="password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    onKeyDown={handleKeyPress}
+                    />
+                </div>
+                {children}
+                <button className="btn btn-primary" onClick={handleLogin}>Login</button>
             </div>
-        <div>
-            <label htmlFor="password">Password:</label>
-            <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            onKeyPress={handleKeyPress}
-            />
         </div>
-        <button onClick={handleLogin}>Login</button>
-    </div>
   );
 };
 
