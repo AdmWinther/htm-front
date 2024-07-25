@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import postRequestMaker from '../services/postRequestMaker';
+//import UserDashboard from './P04_UserDashboard';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -8,21 +9,16 @@ const LoginForm = () => {
     const [children, setChildren] = useState(null);
 
     const handleLogin = () => {
-        postRequestMaker('http://localhost:8080/login', {username: username, password: password})
+        postRequestMaker(process.env.REACT_APP_BACKEND_URL+'/login', {username: username, password: password})
         .then(response => {
             if(response.status === 401) {
                 setChildren(
                     <div>
-                        
-
                         <p style={{color: "red"}}>"Bad Credentials"</p>
-
-
                     </div>
-
                 );
             } else if(response.status === 200) {
-                window.location.href = response.url;
+                window.location.href = '/Dashboard';
             } else {
                 setChildren(
                     <p style={{color: "red"}}>"Server Error"</p>
@@ -31,13 +27,13 @@ const LoginForm = () => {
             // Handle response from the backend
         })
     }
-    
+
     const handleKeyPress = event => {
         if (event.key === 'Enter') {
             handleLogin();
         }
     };
-    
+
     return (
         <div className="h-100 d-flex justify-content-center align-items-center" >
             <div className="h-auto">
