@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React, {useState, useEffect} from 'react';
+import NavigationBar from '../components/NavigationBar';
 
 const Dashboard = () => {
-    let [userType, setUserType] = useState('unknown');
+    const [userType, setUserType] = useState('unknown');
 
-    getUserType().then(data => {
-        setUserType(data);
-    });
+    useEffect(() => {
+        getUserType()
+        .then(data => {
+            setUserType(data);    
+        })
+    }, []);
+
     return (
         <div>
+            <NavigationBar/>
             <h1>{userType}</h1>
         </div>
     )
-}
+};
 
 const getUserType = () => {
     return new Promise((resolve, reject) => {
