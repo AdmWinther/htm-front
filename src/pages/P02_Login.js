@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import postRequestMaker from '../services/postRequestMaker';
-//import UserDashboard from './P04_UserDashboard';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -40,7 +39,7 @@ const LoginForm = () => {
                 <div className="mb-3">
                     <label className="form-label" htmlFor="username">Username:</label>
                     <input className="form-control"
-                    // type="text"
+
                     id="username"
                     value={username}
                     onChange={e => setUsername(e.target.value)}

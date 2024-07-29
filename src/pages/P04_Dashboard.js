@@ -1,24 +1,30 @@
 import React, {useState, useEffect} from 'react';
 import getUserType from '../services/getUserType';
 import NavigationBar from '../components/NavigationBar';
-import DashboardContent from '../components/DashboardContent';
 import { Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
-    const [userType, setuserType] = useState(null);
+
+    const [options, setOptions] = useState([]);
 
     useEffect(() => {
+        // setOptions(['MyUsers', 'MyOrganizations', 'MySettings']);
         getUserType()
         .then(data => {
-            setuserType(data === 'User' ? "User" : "Admin");
+            if (data === 'Admin' || data === 'admin') {
+                setOptions(['MyUsers', 'MyOrganizations', 'MySettings']);
+            } else {
+                setOptions(['Users', 'Projects', 'Account']);
+            }
         })
     }, []);
 
+    console.log("options");
     return (
-            <div>
-                <NavigationBar type={userType}/>
-                <Outlet/>
-            </div>
+        <div>
+            <NavigationBar options={options}/>
+            <Outlet/>
+        </div>
     )
 };
 
