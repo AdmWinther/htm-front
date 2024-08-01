@@ -15,7 +15,6 @@ const NavigationBar = ({options}) => {
         }
     }; 
 
-    console.log("Corocodile");
     let tabs = options.map(tabTitle => {
         return (
             <li className="nav-item" key={tabTitle}>

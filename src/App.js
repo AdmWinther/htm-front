@@ -6,10 +6,16 @@ import Home from './pages/P01_Home';
 import Login from './pages/P02_Login';
 import ContactInfo from './pages/P03_Contact';
 import Dashboard from './pages/P04_Dashboard';
-import Test from './components/Test';
-import MyUsersPanel from './components/MyUsersPanel';
-import NewUserPanel from './components/NewUserPanel';
-
+import Test from './components/C001_Test';
+import NotFound from './components/C404_NotFound';
+import MyUsersPanel from './components/C002_MyUsersPanel';
+import NewUserPanel from './components/C004_NewUserPanel';
+import AllMyUsers from './components/C007_AllMyUsers';
+import FindUser from './components/C008_FindUser';
+import OrganizationPanel from './components/C012_OrganizationsPanel';
+import NewOrganization from './components/C009_NewOrganization';
+import FindOrganization from './components/C010_FindOrganization';
+import AllOrganization from './components/C011_AllOrganization';
 
 
 
@@ -27,17 +33,26 @@ function App() {
                         <Route path="Users" element={<h1>Users</h1>} />
                         <Route path="Projects" element={<h1>Projects</h1>} />
                         <Route path="Account" element={<h1>Account</h1>} />
-                        <Route path="MyOrganizations" element={<h1>ORGANIZATIONS</h1>} />
+
+                        <Route path="MyOrganizations" element={<OrganizationPanel />}>
+                            <Route index element={<NewOrganization/>} />
+                            <Route path="NewOrganization" element={<NewOrganization/>} />
+                            <Route path="FindOrganization" element={<FindOrganization/>} />
+                            <Route path="AllOrganization" element={<AllOrganization/>} />
+                        </Route>
+
                         <Route path="MyUsers" element={<MyUsersPanel/>}>
                             <Route index element={<NewUserPanel/>} />
                             <Route path="NewUser" element={<NewUserPanel/>} />
-                            <Route path="AllMyUsers" element={<h1>All Users</h1>} />
-                            <Route path="FindUser" element={<h1>Find User.</h1>} />
+                            <Route path="AllMyUsers" element={<AllMyUsers />} />
+                            <Route path="FindUser" element={<FindUser />} />
+                            <Route path="*" element={<NotFound />} />
                         </Route>
+                        
                         <Route path="MyProjects" element={<h1>PROJECTS</h1>} />
-                        <Route path="*" element={<p>Under Construction.</p>} />
+                        <Route path="*" element={<NotFound />} />
                     </Route>
-                    <Route path="*" element={<h1>Not Found</h1>} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </Router>
         
