@@ -12,7 +12,7 @@ import MyUsersPanel from './components/C002_MyUsersPanel';
 import NewUserPanel from './components/C004_NewUserPanel';
 import AllMyUsers from './components/C007_AllMyUsers';
 import FindUser from './components/C008_FindUser';
-import OrganizationPanel from './components/C012_OrganizationsPanel';
+import MyOrganizationsPanel from './components/C002_MyOrganizationsPanel';
 import NewOrganization from './components/C009_NewOrganization';
 import FindOrganization from './components/C010_FindOrganization';
 import AllOrganization from './components/C011_AllOrganization';
@@ -34,18 +34,18 @@ function App() {
                         <Route path="Projects" element={<h1>Projects</h1>} />
                         <Route path="Account" element={<h1>Account</h1>} />
 
-                        <Route path="MyOrganizations" element={<OrganizationPanel />}>
+                        <Route path="MyOrganizations" element={<MyOrganizationsPanel />}>
                             <Route index element={<NewOrganization/>} />
                             <Route path="NewOrganization" element={<NewOrganization/>} />
                             <Route path="FindOrganization" element={<FindOrganization/>} />
-                            <Route path="AllOrganization" element={<AllOrganization/>} />
+                            <Route path="AllOrganizations" element={<AllOrganization/>} />
                         </Route>
 
                         <Route path="MyUsers" element={<MyUsersPanel/>}>
                             <Route index element={<NewUserPanel/>} />
                             <Route path="NewUser" element={<NewUserPanel/>} />
                             <Route path="AllMyUsers" element={<AllMyUsers />} />
-                            <Route path="FindUser" element={<FindUser />} />
+                            <Route path="FindMyUser" element={<FindUser />} />
                             <Route path="*" element={<NotFound />} />
                         </Route>
                         

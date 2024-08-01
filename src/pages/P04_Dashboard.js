@@ -12,7 +12,7 @@ const Dashboard = () => {
         getUserType()
         .then(data => {
             if (data === 'Admin' || data === 'admin') {
-                setOptions(['MyUsers', 'MyOrganizations', 'MySettings']);
+                setOptions(['MyUsers', 'MyOrganizations', 'MyProjects']);
             } else {
                 setOptions(['Users', 'Projects', 'Account']);
             }
@@ -25,7 +25,7 @@ const Dashboard = () => {
             <div className='row p-0 m-0'>
                 <NavigationBar options={options}/>
             </div>
-            <div className='row flex-fill p-0 m-0'>
+            <div className='row flex-fill p-0 m-0 '>
                 <Outlet/>
             </div>
         </div>
