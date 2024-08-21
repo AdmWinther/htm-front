@@ -49,7 +49,10 @@ function App() {
                             <Route path="*" element={<NotFound />} />
                         </Route>
                         
-                        <Route path="MyProjects" element={<h1>PROJECTS</h1>} />
+                        <Route path="MyProjects" element={<h1>PROJECTS</h1>}>
+                            <Route index element={<h1>My Projects</h1>} />
+                            <Route path="*" element={<NotFound />} />
+                        </Route>
                         <Route path="*" element={<NotFound />} />
                     </Route>
                     <Route path="*" element={<NotFound />} />

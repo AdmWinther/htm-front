@@ -1,7 +1,21 @@
+// Desc: Dashboard page for the user to navigate to different sections of the application
+//this component makes a page with the following forma
+// 1. Navigation bar at the top
+// 2. A main section that will be filled with the content of the selected option
+// ----------------
+//| Navigation Bar |
+//|----------------|
+//|                |
+//|      Outlet    |
+//|                |
+//------------------
+
+
 import React, {useState, useEffect} from 'react';
 import getUserType from '../services/getUserType';
 import NavigationBar from '../components/C003_NavigationBar';
 import { Outlet } from 'react-router-dom';
+import Double from '../classes/Double';
 
 const Dashboard = () => {
 
@@ -12,9 +26,9 @@ const Dashboard = () => {
         getUserType()
         .then(data => {
             if (data === 'Admin' || data === 'admin') {
-                setOptions(['MyUsers', 'MyOrganizations', 'MyProjects']);
+                setOptions([new Double('MyUsers','Users'), new Double('MyOrganizations', 'Organizations'), new Double('MyProjects', 'projects')]);
             } else {
-                setOptions(['Users', 'Projects', 'Account']);
+                setOptions([new Double('Users','Users'), new Double('Projects','Projects'), new Double('Account', 'Account')]);
             }
         })
     }, []);

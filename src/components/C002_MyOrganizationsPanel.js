@@ -1,5 +1,5 @@
 import React from "react";
-import SidebarPlusPanel from "./C002_0_SidebarPlusPanel";
+import SidebarPlusPanel from "./C002_0_SidebarAndPanel";
 
 function MyUsersPanel() {
     let SidebarOptions = ['NewOrganization', 'FindOrganization', 'AllOrganizations'];

@@ -8,7 +8,7 @@ function Test() {
 
     //function for the get Button
     const fetchDataGet = () => {
-        let url = 'http://localhost:8080/version';
+        let url = process.env.REACT_APP_BACKEND_URL+'/version';
         fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -24,12 +24,13 @@ function Test() {
             console.log(csrfToken);
             const data = {text:"!hi peachy" };
             
-            let url = 'http://localhost:8080/version';
+            let url = process.env.REACT_APP_BACKEND_URL+'/version';
             fetch(url , {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-XSRF-TOKEN': csrfToken // Include the CSRF token in the header
+                    'X-XSRF-TOKEN': csrfToken, // Include the CSRF token in the header
+                    
                 },
                 credentials: 'include', // Ensure cookies are sent with the request
                 body: JSON.stringify(data)

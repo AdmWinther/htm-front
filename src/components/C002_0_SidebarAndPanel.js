@@ -1,3 +1,21 @@
+//This component makes a page with the following format:
+// 1. a sidebar at the left
+// 2. a main section that will be filled with the content of the selected option
+// ---------------
+//| Si|    Pa     |
+//| eb|    ne     |
+//| r |    l      |
+//|   |           |
+//|   |    (O     |
+//|   |    ut     |
+//|   |    le     |
+//|   |    t)     |
+//|   |           |
+//|   |           |
+//----------------
+
+
+
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./C005_Sidebar";

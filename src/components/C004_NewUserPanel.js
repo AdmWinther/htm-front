@@ -10,15 +10,6 @@ function NewUserPanel() {
 		"role",
 	];
 
-	//define the state for the message to be displayed as a result of making a new user
-	// let [message, setMessage] = React.useState("");
-
-	//defining the state for the input fields
-	// let MyStates = {};
-	// for (let parameter of parameters) {
-	// 	MyStates[parameter] = React.useState("");
-	// }
-
 	return (
 		<div className="container-fluid">
 			{parameters.map((parameter) => {
@@ -48,16 +39,6 @@ function NewUserPanel() {
 				);
 			})}
 			<div className="d-grid gap-2">
-				{/* The message to be displayed as a result of making a new user */}
-				{/* on top of the submit button */}
-				{/* <label
-					key="SubmitLabel"
-					className="form-label"
-					style={{ color: "red" }}
-				>
-					{message}
-				</label> */}
-				{/* The submit button */}
 				<button
 					key="SubmitButton"
 					className="btn btn-primary"

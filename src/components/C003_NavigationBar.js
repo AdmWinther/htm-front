@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import postRequestMaker from '../services/postRequestMaker';
+import MakeItReadable from '../services/MakeItReadable';
+
 
 const NavigationBar = ({options}) => {
     
@@ -17,8 +19,10 @@ const NavigationBar = ({options}) => {
 
     let tabs = options.map(tabTitle => {
         return (
-            <li className="nav-item" key={tabTitle}>
-                <Link to={tabTitle} className="nav-link active">{tabTitle}</Link>
+            <li className="nav-item" key={tabTitle.url}>
+                <Link to={tabTitle.url} className="nav-link active">
+                    {MakeItReadable(tabTitle.url)}
+                </Link>
             </li>
         )
     })

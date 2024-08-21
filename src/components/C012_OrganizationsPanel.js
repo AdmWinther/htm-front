@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Sidebar from "./C005_Sidebar";
+import Sidebar from "./C002_0_SidebarAndPanel";
 
 function OrganizationsPanel() {
     return (
