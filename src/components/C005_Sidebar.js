@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import MakeItReadable from "../services/MakeItReadable";
 
 const Sidebar = ({options}) => {
-    console.log(options);
+    // console.log(options);
 
     let buttons = options.map((element) => {
         return (
-            <div className="row align-items-end">
+            <div className="row align-items-end" key={element}>
                 <Link to={element} className="nav-link active">
                     {MakeItReadable(element)}
                 </Link>

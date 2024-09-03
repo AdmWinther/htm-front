@@ -8,7 +8,7 @@ const LoginForm = () => {
     const [children, setChildren] = useState(null);
 
     const handleLogin = () => {
-        postRequestMaker(process.env.REACT_APP_BACKEND_URL+'/login', {username: username, password: password})
+        postRequestMaker(process.env.REACT_APP_BACKEND_URL+process.env.REACT_APP_ENDPOINT_LOGIN, {username: username, password: password})
         .then(response => {
             if(response.status === 401) {
                 setChildren(
