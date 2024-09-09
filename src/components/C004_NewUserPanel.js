@@ -1,41 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+
+import LabelInput from "./C000_LabelInput";
 
 function NewUserPanel() {
 	//an array of strings
+
+    const [newUser, setNewUser] = useState({});
+
 	let parameters= [
-		"name",
-		"lastName",
-		"emailAddress",
-		"password",
-		"role",
+		["firstName", "First Name", "John"],
+		["lastName", "Last Name", "Doe"],
+		["emailAddress", "Email Address", "example@abc.com"],
+		["password", "Password", "password"],
+		["role", "Role", "Admin"],
 	];
 
 	return (
 		<div className="container-fluid">
 			{parameters.map((parameter) => {
 				return (
-					<div key={parameter}>
-						<label
-							htmlFor="inputPassword5"
-							className="form-label"
-						>
-							{parameter.charAt(0).toUpperCase() +
-								parameter.slice(1)}
-						</label>
-						<input
-							key={parameter}
-							type={
-								parameter === "Password" ? "password" : "text"
-							}
-							id={parameter}
-							className="form-control"
-							placeholder={parameter}
-							// onChange={(event) => {
-							// 	MyStates[parameter][1](event.target.value);
-							// 	console.log(MyStates[parameter][0]);
-							// }}
-						/>
-					</div>
+                    <div>
+                        <LabelInput key={"NewUserFormLabelInput"+parameter[0]} parameter={parameter} setStateFunction={setNewUser} theState={newUser}/>
+                    </div>
 				);
 			})}
 			<div className="d-grid gap-2">

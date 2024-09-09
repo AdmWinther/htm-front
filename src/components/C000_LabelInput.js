@@ -3,6 +3,9 @@
 //the setStateFunction is a function that takes in the value of the input field. This function is passed from the parent component
 //and is used to update the state of the parent component. Therefore this handler should be a setState function that is made in the parent component
 
+//the variable parameter is an array that contains the name of the label,(the variable will be sent to the backend server with this name)
+//the display neme of the label, (the text that is used in front end as the label for that input field) the placeholder of the input field.
+
 import React from "react";
 //import MakeItReadable from "../services/MakeItReadable"
 

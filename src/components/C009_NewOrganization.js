@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import LabelInput from "./C000_LabelInput";
+import DoubleCheckFormValues from "./C014_DoubleCheckFormValues";
 
 
 
@@ -7,15 +8,17 @@ import LabelInput from "./C000_LabelInput";
 
 const NewOrganization = () => {
 
+    const postRequestAddress = process.env.REACT_APP_BACKEND_URL+process.env.REACT_APP_ENDPOINT_NEW_ORGANIZATION;
     let allParameters= [
-        ["NewOrganizationName", "Organization Name", "My Organization"],
-        ["SuperUserName", "Super User Name", "John"], 
-        ["SuperUserLastName", "Super User Last Name", "Doe"],
-        ["SuperUserEmailAddress", "Super User Email Address", "example@abc.com"],
-        ["SuperUserPassword", "Super User Password", "password"],
+        ["organization_name", "Organization Name", "My Organization"],
+        ["superuser_name", "Super User Name", "John"], 
+        ["superuser_lastname", "Super User Last Name", "Doe"],
+        ["superuser_email", "Super User Email Address", "example@abc.com"],
+        ["superuser_password", "Super User Password", "password"],
     ];
     const [formValues,setFormValues] = useState({});
-
+    const [newOrganization, setNewOrganization] = useState('');
+    const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
     return (
         <div className="container-fluid">
 			{allParameters.map(( oneParameter, index) => {
@@ -29,20 +32,17 @@ const NewOrganization = () => {
 					key="SubmitButton"
 					className="btn btn-primary"
 					type="button"
-					onClick={()=>submit(formValues)}
+                    disabled = {submitButtonDisabled}
+					onClick={()=>DoubleCheckFormValues(formValues, setNewOrganization, setSubmitButtonDisabled, postRequestAddress)}
 				>
                     {"Submit"}
 				</button>
 			</div>
+            <div>
+                {newOrganization}
+            </div>
 		</div>
     );
-}
-
-
-
-const submit = (formValues) => {
-    console.log("This is the form values");
-    console.log(formValues);
 }
 
 

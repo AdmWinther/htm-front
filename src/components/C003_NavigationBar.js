@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
-import postRequestMaker from '../services/postRequestMaker';
+import loginPostRequestMaker from '../services/loginPostRequestMaker';
 import MakeItReadable from '../services/MakeItReadable';
 
 
@@ -10,7 +10,7 @@ const NavigationBar = ({options}) => {
     const LogoutClickHandler = async () => {
         try {
           // Send a post request to logout
-          await postRequestMaker(process.env.REACT_APP_BACKEND_URL+'/logout', {});
+          await loginPostRequestMaker(process.env.REACT_APP_BACKEND_URL+'/logout', {});
           window.location.href = '/';
         } catch (error) {
           console.error('Error during logout:', error);
