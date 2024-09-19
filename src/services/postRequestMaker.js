@@ -6,8 +6,6 @@ function PostRequestMaker(url, data) {
     dataKeys.forEach(key => {
         formData[key] = data[key];
     });
-    // formData.append('username', data.username);
-    // formData.append('password', data.password);
     return new Promise((resolve, reject) => {
         getCsrfToken()
         .then(token => fetch(url, {

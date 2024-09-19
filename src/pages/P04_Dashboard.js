@@ -20,13 +20,14 @@ import Double from '../classes/Double';
 const Dashboard = () => {
 
     const [options, setOptions] = useState([]);
+    console.log(process.env.REACT_APP_Verbose);
 
     useEffect(() => {
 
         getUserType()
         .then(data => {
-            if (data === 'Admin' || data === 'admin') {
-                setOptions([new Double('MyUsers','Users'), new Double('MyOrganizations', 'Organizations'), new Double('MyProjects', 'projects')]);
+            if (String(data).toLowerCase() === 'admin') {
+                setOptions([new Double('MyUsers','AdminUsers'), new Double('MyOrganizations', 'Organizations'), new Double('MyProjects', 'projects')]);
             } else {
                 setOptions([new Double('Users','Users'), new Double('Projects','Projects'), new Double('Account', 'Account')]);
             }

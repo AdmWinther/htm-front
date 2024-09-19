@@ -14,7 +14,7 @@ const NewOrganization = () => {
         ["superuser_name", "Super User Name", "John"], 
         ["superuser_lastname", "Super User Last Name", "Doe"],
         ["superuser_email", "Super User Email Address", "example@abc.com"],
-        ["superuser_password", "Super User Password", "password"],
+        ["superuser_password", "Super User Password", "password"]
     ];
     const [formValues,setFormValues] = useState({});
     const [newOrganization, setNewOrganization] = useState('');
@@ -23,7 +23,6 @@ const NewOrganization = () => {
         <div className="container-fluid">
 			{allParameters.map(( oneParameter, index) => {
 				return (
-					// <LabelInput parameter={allInputStates.name} inputChangeHandler={allInputStates.stateVariable} theState={allInputStates.setStateFunction}/>
 					<LabelInput key={"NewOrganizationFormLabelInput"+index} parameter={oneParameter} setStateFunction={setFormValues} theState={formValues}/>
 				);
 			})}

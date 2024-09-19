@@ -3,7 +3,7 @@ import PostRequestMaker from "../services/PostRequestMaker";
 
 
 const DoubleCheckFormValues = (formValues, setNewOrganization, setSubmitButtonDisabled, postRequestAddress) => {
-    console.log("This is the form values");
+    if(process.env.REACT_APP_Verbose)console.log("This is the form values");
     //Add a new element under the submit button that will display the form values and ask the user to confirm
     const formFields = Object.keys(formValues);
     
@@ -38,8 +38,10 @@ const DoubleCheckFormValues = (formValues, setNewOrganization, setSubmitButtonDi
     );
     setNewOrganization(enteredValues);
     setSubmitButtonDisabled(true);
-    console.log(formValues);
-    console.log(enteredValues);
+    if(process.env.REACT_APP_Verbose === "true"){
+        console.log(formValues);
+        console.log(enteredValues);
+    }
 }
 
 export default DoubleCheckFormValues;
@@ -50,18 +52,17 @@ function Cancel(setNewOrganization, setSubmitButtonDisabled) {
 }
 
 function Confirm(formValues, setNewOrganization, setSubmitButtonDisabled, postRequestAddress) {
-    console.log("Confirm is called");
+    if(process.env.REACT_APP_Verbose) console.log("Confirm is called");
     PostRequestMaker(postRequestAddress, formValues)
     .then((response) => {
-        if(response.status === 200){
-            console.log("status 200");
-            setSubmitButtonDisabled(false);
-            setNewOrganization(<p style={{color: "red"}}>"New Organization is saved successfully."</p>);
-            console.log(setSubmitButtonDisabled);
-            console.log(setNewOrganization);
-        } else{
-            console.log("Error.");
-            setNewOrganization = <p style={{color: "red"}}>"Error."</p>
+        if(response.status === 200) {
+            return response.json();
+        }else{
+            return {message: "Error."};
         }
+    }).then((response) => {
+        if(process.env.REACT_APP_Verbose)console.log(response);
+        setSubmitButtonDisabled(false);
+        setNewOrganization(<p style={{color: "red"}}>{response.message}</p>);
     })
 }
