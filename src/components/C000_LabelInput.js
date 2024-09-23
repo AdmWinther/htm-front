@@ -11,6 +11,7 @@ import React from "react";
 
 
 const LabelInput =({parameter, setStateFunction, theState})=> {
+    // console.log(parameter);
     let field = parameter[0];
     let display = parameter[1];
     let placeholder = parameter[2];
@@ -33,6 +34,17 @@ const LabelInput =({parameter, setStateFunction, theState})=> {
                 onChange={(event) => {
                  	let newInputValue = event.target.value;
                  	const currentKeys = Object.keys(theState);
+
+
+                    if(field === "emailAddress"){
+                        //making sure the email address is in lowercase.
+                        newInputValue = newInputValue.toLowerCase();
+                    }
+
+
+
+
+                    
                     if(currentKeys.includes(field)) {
                         setStateFunction({...theState, [field]: newInputValue});
                     } else {

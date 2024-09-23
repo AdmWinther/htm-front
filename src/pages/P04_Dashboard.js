@@ -20,7 +20,7 @@ import Double from '../classes/Double';
 const Dashboard = () => {
 
     const [options, setOptions] = useState([]);
-    console.log(process.env.REACT_APP_Verbose);
+    // if(process.env.REACT_APP_Verbose)console.log(process.env.REACT_APP_Verbose);
 
     useEffect(() => {
 
