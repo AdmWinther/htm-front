@@ -1,0 +1,15 @@
+REACT_APP_BACKEND_URL = http://localhost:8080
+#REACT_APP_BACKEND_URL = Heroku URL
+
+REACT_APP_ENDPOINT_LOGIN = /login
+
+#UserRelatedEndpoints
+REACT_APP_ENDPOINT_NEW_USER = /api/user/newUser
+REACT_APP_ENDPOINT_GET_USER_TYPE = /api/user/userType
+
+#OrganizationRelatedEndpoints
+REACT_APP_ENDPOINT_NEW_ORGANIZATION = /api/organization/new
+
+
+REACT_APP_Verbose = true
+REACT_APP_USER_ROLES = "USER,ADMIN"

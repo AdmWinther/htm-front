@@ -8,8 +8,13 @@ function Test() {
 
     //function for the get Button
     const fetchDataGet = () => {
-        let url = process.env.REACT_APP_BACKEND_URL+'/version';
-        fetch(url)
+        let url = process.env.REACT_APP_BACKEND_URL+
+                process.env.REACT_APP_ENDPOINT_VERSION;
+
+        fetch(url, {
+            method: 'GET',
+            credentials: 'include'
+        })
         .then(response => response.json())
         .then(data => {
             console.log(data.version);
@@ -24,13 +29,13 @@ function Test() {
             console.log(csrfToken);
             const data = {text:"!hi peachy" };
             
-            let url = process.env.REACT_APP_BACKEND_URL+'/version';
+            let url = process.env.REACT_APP_BACKEND_URL+process.env.REACT_APP_ENDPOINT_VERSION;
             fetch(url , {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-XSRF-TOKEN': csrfToken, // Include the CSRF token in the header
-                    
+                    'Access-Control-Allow-Origin': 'http://127.0.0.1:3000/'
                 },
                 credentials: 'include', // Ensure cookies are sent with the request
                 body: JSON.stringify(data)

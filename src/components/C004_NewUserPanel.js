@@ -16,9 +16,9 @@ function NewUserPanel() {
 	];
 
     let dropdownParameters = [
-        "role", "Role", ["ADMIN", "USER"]
-    ];
-
+        "role", "Role", process.env.REACT_APP_USER_ROLES.split(",")
+    ];    
+    
     const [formValues,setFormValues] = useState({});
     const [newUser, setNewUser] = useState('');
     const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);

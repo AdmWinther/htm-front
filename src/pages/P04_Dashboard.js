@@ -19,7 +19,7 @@ import Double from '../classes/Double';
 
 const Dashboard = () => {
 
-    const [options, setOptions] = useState([]);
+    const [DashboardTabs, setDashboardTabs] = useState([]);
     // if(process.env.REACT_APP_Verbose)console.log(process.env.REACT_APP_Verbose);
 
     useEffect(() => {
@@ -27,9 +27,11 @@ const Dashboard = () => {
         getUserType()
         .then(data => {
             if (String(data).toLowerCase() === 'admin') {
-                setOptions([new Double('MyUsers','AdminUsers'), new Double('MyOrganizations', 'Organizations'), new Double('MyProjects', 'projects')]);
-            } else {
-                setOptions([new Double('Users','Users'), new Double('Projects','Projects'), new Double('Account', 'Account')]);
+                //Admin dashboard tabs
+                setDashboardTabs([new Double('Users','Users'), new Double('Organizations', 'Organizations'), new Double('MyProjects', 'Projects')]);
+            } else if (String(data).toLowerCase() === 'user'){
+                //User dashboard tabs
+                setDashboardTabs([new Double('Users','Users'), new Double('Projects','Projects'), new Double('Account', 'Account')]);
             }
         })
     }, []);
@@ -38,7 +40,7 @@ const Dashboard = () => {
         // <div className='h-100 flex-fill flex-column'>
         <div className='h-100 d-flex flex-column flex-shring-0'>
             <div className='row p-0 m-0'>
-                <NavigationBar options={options}/>
+                <NavigationBar tabProps={DashboardTabs}/>
             </div>
             <div className='row flex-fill p-0 m-0 '>
                 <Outlet/>

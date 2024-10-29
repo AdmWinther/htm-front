@@ -1,6 +1,6 @@
 function getCsrfToken() {
     return new Promise((resolve, reject) => {
-        fetch(process.env.REACT_APP_BACKEND_URL+'/version', { method: 'GET', credentials: 'include', mode: 'cors'})
+        fetch(process.env.REACT_APP_BACKEND_URL+process.env.REACT_APP_ENDPOINT_VERSION, { method: 'GET', credentials: 'include', mode: 'cors'})
         .then(response => {
             const headersObj = {};
             response.headers.forEach((value, name) => {

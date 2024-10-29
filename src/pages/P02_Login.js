@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import loginPostRequestMaker from '../services/loginPostRequestMaker';
+import getUserType from '../services/getUserType';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -17,7 +18,14 @@ const LoginForm = () => {
                     </div>
                 );
             } else if(response.status === 200) {
-                window.location.href = '/Dashboard';
+                getUserType()
+                .then(data => {
+                    if (String(data).toLowerCase() === 'admin') {
+                        window.location.href = '/AdminDashboard';
+                    } else if(String(data).toLowerCase() === 'user'){
+                        window.location.href = '/UserDashboard';
+                    }
+                })
             } else {
                 setChildren(
                     <p style={{color: "red"}}>"Server Error"</p>

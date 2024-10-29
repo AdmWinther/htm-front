@@ -5,7 +5,7 @@ import loginPostRequestMaker from '../services/loginPostRequestMaker';
 import MakeItReadable from '../services/MakeItReadable';
 
 
-const NavigationBar = ({options}) => {
+const NavigationBar = ({tabProps}) => {
     
     const LogoutClickHandler = async () => {
         try {
@@ -17,11 +17,11 @@ const NavigationBar = ({options}) => {
         }
     }; 
 
-    let tabs = options.map(tabTitle => {
+    let tabs = tabProps.map(tabProp => {
         return (
-            <li className="nav-item" key={tabTitle.url}>
-                <Link to={tabTitle.url} className="nav-link active">
-                    {MakeItReadable(tabTitle.url)}
+            <li className="nav-item" key={tabProp.url}>
+                <Link to={tabProp.url} className="nav-link active">
+                    {MakeItReadable(tabProp.display)}
                 </Link>
             </li>
         )
