@@ -18,14 +18,21 @@ const LoginForm = () => {
                     </div>
                 );
             } else if(response.status === 200) {
-                getUserType()
-                .then(data => {
-                    if (String(data).toLowerCase() === 'admin') {
-                        window.location.href = '/AdminDashboard';
-                    } else if(String(data).toLowerCase() === 'user'){
-                        window.location.href = '/UserDashboard';
-                    }
-                })
+                console.log("Login successful");
+                response.json().then(data => {
+                    localStorage.setItem('token', data.value);
+                    // console.log("localStorage in login");
+                    // console.log(localStorage);
+                    // console.log("localStorage in login-E");
+                    getUserType()
+                    .then(data => {
+                        if (String(data).toLowerCase() === 'admin') {
+                            window.location.href = '/AdminDashboard';
+                        } else if(String(data).toLowerCase() === 'user'){
+                            window.location.href = '/UserDashboard';
+                        }
+                    })
+                });
             } else {
                 setChildren(
                     <p style={{color: "red"}}>"Server Error"</p>

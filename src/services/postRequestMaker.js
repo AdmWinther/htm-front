@@ -13,7 +13,7 @@ function PostRequestMaker(url, data) {
             headers: {
                 'Content-Type': 'application/json',
                 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
-                'X-XSRF-TOKEN': token // Include the CSRF token in the header
+                // 'X-XSRF-TOKEN': token // Include the CSRF token in the header
             },
             credentials: 'include', // Ensure cookies are sent with the request
             body: JSON.stringify(formData)
