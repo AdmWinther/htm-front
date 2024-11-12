@@ -17,7 +17,7 @@ function getUserType() {
                 throw new Error('Failed to get user type');
             }
         }).then(data => {
-            resolve(data.value);
+            resolve(data.roles[0]);
         })
         .catch(error => {
             reject(error);

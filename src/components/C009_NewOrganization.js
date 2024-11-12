@@ -8,9 +8,11 @@ import DoubleCheckFormValues from "./C014_DoubleCheckFormValues";
 
 const NewOrganization = () => {
 
-    const postRequestAddress = process.env.REACT_APP_BACKEND_URL+process.env.REACT_APP_ENDPOINT_NEW_ORGANIZATION;
+    const postRequestAddress = process.env.REACT_APP_BACKEND_URL+
+        process.env.REACT_APP_ENDPOINT_NEW_ORGANIZATION;
     let allParameters= [
         ["organization_name", "Organization Name", "My Organization"],
+        ["description", "Description", "Description"],
         ["superuser_name", "Super User Name", "John"], 
         ["superuser_lastname", "Super User Last Name", "Doe"],
         ["superuser_email", "Super User Email Address", "example@abc.com"],
@@ -23,7 +25,12 @@ const NewOrganization = () => {
         <div className="container-fluid">
 			{allParameters.map(( oneParameter, index) => {
 				return (
-					<LabelInput key={"NewOrganizationFormLabelInput"+index} parameter={oneParameter} setStateFunction={setFormValues} theState={formValues}/>
+					<LabelInput 
+                        key={"NewOrganizationFormLabelInput"+index}
+                        parameter={oneParameter}
+                        setStateFunction={setFormValues}
+                        theState={formValues}
+                    />
 				);
 			})}
 			<div className="d-grid gap-2">
@@ -32,7 +39,13 @@ const NewOrganization = () => {
 					className="btn btn-primary"
 					type="button"
                     disabled = {submitButtonDisabled}
-					onClick={()=>DoubleCheckFormValues(formValues, setNewOrganization, setSubmitButtonDisabled, postRequestAddress)}
+					onClick={
+                        ()=>DoubleCheckFormValues(
+                            formValues,
+                            setNewOrganization,
+                            setSubmitButtonDisabled,
+                            postRequestAddress)
+                    }
 				>
                     {"Submit"}
 				</button>

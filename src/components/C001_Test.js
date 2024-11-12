@@ -1,5 +1,5 @@
 import React from 'react';
-import getCsrfToken from '../services/getCsrfToken';
+// import getCsrfToken from '../services/getCsrfToken';
 import { Link } from 'react-router-dom';
 function Test() {
 
@@ -23,19 +23,21 @@ function Test() {
     }
 
     const fetchDataPost =async () => {
-        getCsrfToken()
-        .then( csrfToken => {
+        // getCsrfToken()
+        let csrfToken = "AlakiToken";
+        // .then( csrfToken => {
             console.log('fetchDataPost, i have the token.');
             console.log(csrfToken);
             const data = {text:"!hi peachy" };
             
-            let url = process.env.REACT_APP_BACKEND_URL+process.env.REACT_APP_ENDPOINT_VERSION;
+            let url = process.env.REACT_APP_BACKEND_URL+
+                process.env.REACT_APP_ENDPOINT_VERSION;
             fetch(url , {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-XSRF-TOKEN': csrfToken, // Include the CSRF token in the header
-                    'Access-Control-Allow-Origin': 'http://127.0.0.1:3000/'
+                    'Access-Control-Allow-Origin': process.env.REACT_APP_FRONTEND_URL
                 },
                 credentials: 'include', // Ensure cookies are sent with the request
                 body: JSON.stringify(data)
@@ -48,7 +50,7 @@ function Test() {
                 console.log(responseData.version);
                 setVersion(responseData.version);
             });
-        });
+        // });
     }
 
     return (
