@@ -5,8 +5,10 @@ function GetRequestMaker(url) {
         fetch(url, {
             method: 'GET',
             headers: {
+                'origin': process.env.REACT_APP_FRONTEND_URL,
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token'),
+                credentials: 'include', // Ensure that cookies are sent with the request
+                // 'Authorization': localStorage.getItem('token'),
                 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
             },
             credentials: 'include', // Ensure cookies are sent with the request

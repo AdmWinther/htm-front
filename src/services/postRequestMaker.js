@@ -13,6 +13,7 @@ function PostRequestMaker(url, data) {
         fetch(url, {
             method: 'POST',
             headers: {
+                credentials: 'include', // Ensure that cookies are sent with the request
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('token'),
                 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',

@@ -9,11 +9,13 @@ const NavigationBar = ({tabProps}) => {
     
     const LogoutClickHandler = async () => {
         try {
-          // Send a post request to logout
-          await loginPostRequestMaker(process.env.REACT_APP_BACKEND_URL+'/logout', {});
-          window.location.href = '/';
+            // Send a post request to logout
+            await loginPostRequestMaker(process.env.REACT_APP_BACKEND_URL+'/logout', {});
+            window.location.href = '/';
+            // delete httponly cookies from the browser history
+            document.cookie = "";
         } catch (error) {
-          console.error('Error during logout:', error);
+            console.error('Error during logout:', error);
         }
     }; 
 

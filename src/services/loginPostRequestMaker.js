@@ -6,7 +6,7 @@ function loginPostRequestMaker(url, data) {
     formData.append('password', data.password);
     return new Promise((resolve, reject) => {
         // getCsrfToken()
-        let token = "AlakiToken";
+        let token = "AlakiCSRFToken";
         // .then(token => fetch(url, {
         fetch(url, {
             method: 'POST',

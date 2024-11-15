@@ -21,7 +21,7 @@ function AllOrganization() {
             
             let rows =data.map((organization, index) => {
                 return (
-                    <tr>
+                    <tr key={organization.id}>
                         <th scope="row">{index+1}</th>
                         <td>{organization.name}</td>
                         <td>{organization.description}</td>

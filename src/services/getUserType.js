@@ -8,7 +8,7 @@ function getUserType() {
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
+                'credentials': 'include' 
             }
         }).then(response => {
             if(response.status === 200) {
