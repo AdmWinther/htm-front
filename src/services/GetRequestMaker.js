@@ -13,6 +13,13 @@ function GetRequestMaker(url) {
             },
             credentials: 'include', // Ensure cookies are sent with the request
         })
+        .then(response => {
+            if(response.status === 200){
+                return response
+            } else {
+                throw new Error('Failed to get user type');
+            }
+         })
         // )
         .then(response => {
             resolve(response);

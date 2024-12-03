@@ -42,7 +42,7 @@ function AllOrganization() {
     return (
         <div>
             <h1>This is All Organization component.</h1>
-            <p>{OrganizationList}</p>
+            <>{OrganizationList}</>
         </div>
     );
 }

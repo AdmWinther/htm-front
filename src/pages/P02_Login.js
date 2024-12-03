@@ -25,10 +25,10 @@ const LoginForm = () => {
                     // console.log(localStorage);
                     // console.log("localStorage in login-E");
                 getUserType()
-                .then(data => {
-                    if (String(data).toLowerCase() === 'admin') {
+                .then(data => {                        
+                    if (data === "ADMIN") {
                         window.location.href = '/AdminDashboard';
-                    } else if(String(data).toLowerCase() === 'user'){
+                    } else {
                         window.location.href = '/UserDashboard';
                     }
                 })

@@ -1,16 +1,18 @@
 function getCsrfToken() {
     return new Promise((resolve, reject) => {
-        fetch(process.env.REACT_APP_BACKEND_URL+process.env.REACT_APP_ENDPOINT_VERSION, { method: 'GET', credentials: 'include', mode: 'cors'})
-        .then(response => {
-            const headersObj = {};
-            response.headers.forEach((value, name) => {
-                headersObj[name] = value;
-            });
-            return headersObj;
-        })
+        fetch(process.env.REACT_APP_BACKEND_URL+process.env.REACT_APP_ENDPOINT_CSRF, { method: 'GET', credentials: 'include', mode: 'cors'})
+        // .then(response => {
+            // const headersObj = {};
+            // response.headers.forEach((value, name) => {
+            //     headersObj[name] = value;
+            // });
+            // return headersObj;
+        // })
+        .then(response => response.json())
         .then(data => {
-            console.log('I am here.');
-            let token = data['x-xsrf-token'];
+            console.log('The CSRF token catck done.');
+            let token = data['csrf_token'];
+            console.log(data)
             resolve(token);
         })
         .catch(error => {

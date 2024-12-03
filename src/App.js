@@ -5,6 +5,7 @@ import './App.css';
 import Home from './pages/P01_Home';
 import Login from './pages/P02_Login';
 import ContactInfo from './pages/P03_Contact';
+import LogoutForm from './pages/P06_LogoutConfirm';
 import Dashboard from './pages/P04_Dashboard';
 import Test from './components/C001_Test';
 import NotFound from './components/C404_NotFound';
@@ -15,6 +16,8 @@ import AdminDashboardAllUsers from './components/C007_AdminDashboardAllUsers';
 import MyOrganizationsPanel from './components/C002_MyOrganizationsPanel';
 import NewOrganization from './components/C009_NewOrganization';
 import AllOrganization from './components/C011_AllOrganization';
+
+import Error401Page from './pages/P05_Error401Page';
 
 
 
@@ -55,6 +58,10 @@ function App() {
                         <Route path="Projects" element={<h1>Projects</h1>} />
                         <Route path="Account" element={<h1>Account</h1>} />
                     </Route>
+                    
+                    <Route path = "error401" element= {<Error401Page/>}/>
+                    <Route path="/confirmLogout" element={<LogoutForm />} />
+                    
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </Router>

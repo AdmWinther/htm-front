@@ -66,7 +66,6 @@ function Confirm(formValues, setNewOrganization, setSubmitButtonDisabled, postRe
     }).then((response) => {
         if(process.env.REACT_APP_Verbose)console.log(response);
         setSubmitButtonDisabled(false);
-        console.log(response);
         setNewOrganization(<p style={{color: "red"}}>{response.message}</p>);
     })
 }

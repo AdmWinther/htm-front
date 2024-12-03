@@ -1,4 +1,4 @@
-import getCsrfToken from './getCsrfToken';
+// import getCsrfToken from './getCsrfToken';
 
 function loginPostRequestMaker(url, data) {
     const formData = new URLSearchParams();
@@ -6,7 +6,7 @@ function loginPostRequestMaker(url, data) {
     formData.append('password', data.password);
     return new Promise((resolve, reject) => {
         // getCsrfToken()
-        let token = "AlakiCSRFToken";
+        // let token = "AlakiCSRFToken";
         // .then(token => fetch(url, {
         fetch(url, {
             method: 'POST',
