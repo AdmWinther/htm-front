@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import loginPostRequestMaker from '../services/loginPostRequestMaker';
+import PostRequestMaker from '../services/PostRequestMaker';
 import getUserType from '../services/getUserType';
 
 const LoginForm = () => {
@@ -9,7 +10,10 @@ const LoginForm = () => {
     const [children, setChildren] = useState(null);
 
     const handleLogin = () => {
-        loginPostRequestMaker(process.env.REACT_APP_BACKEND_URL+process.env.REACT_APP_ENDPOINT_LOGIN, {username: username, password: password})
+        console.log("Login button clicked");
+        let url =process.env.REACT_APP_BACKEND_URL+process.env.REACT_APP_ENDPOINT_LOGIN
+        let formData = {username: username, password: password}
+        PostRequestMaker(url, formData, true)
         .then(response => {
             if(response.status === 401) {
                 setChildren(

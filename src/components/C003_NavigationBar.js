@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
-import loginPostRequestMaker from '../services/loginPostRequestMaker';
 import MakeItReadable from '../services/MakeItReadable';
 
 
