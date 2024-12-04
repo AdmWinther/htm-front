@@ -21,16 +21,17 @@ const Dashboard = () => {
 
     const [DashboardTabs, setDashboardTabs] = useState([]);
     // if(process.env.REACT_APP_Verbose)console.log(process.env.REACT_APP_Verbose);
-
     useEffect(() => {
 
         getUserType()
         .then(data => {
             if (String(data).toLowerCase() === 'admin') {
+                console.log("JWT token: "+document.cookie);
                 //Admin dashboard tabs
                 setDashboardTabs([new Double('Users','Users'), new Double('Organizations', 'Organizations'), new Double('MyProjects', 'Projects')]);
             } else if (String(data).toLowerCase() === 'user'){
                 //User dashboard tabs
+                console.log("JWT token: "+document.cookie);
                 setDashboardTabs([new Double('Users','Users'), new Double('Projects','Projects'), new Double('Account', 'Account')]);
             }
         })

@@ -16,8 +16,8 @@ function getCsrfToken() {
             resolve(token);
         })
         .catch(error => {
-        // If an error occurs during the operation, reject the promise
-        reject(error);
+            // If an error occurs during the operation, reject the promise
+            reject(error);
         });
     });
 }

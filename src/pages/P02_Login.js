@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import loginPostRequestMaker from '../services/loginPostRequestMaker';
 import PostRequestMaker from '../services/PostRequestMaker';
-import getUserType from '../services/getUserType';
+import GetUserMainRoleFromLocalStorage from '../services/GetUserMainRoleFromLocalStorage';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -23,19 +22,19 @@ const LoginForm = () => {
                 );
             } else if(response.status === 200) {
                 console.log("Login successful");
-                // response.json().then(data => {   //this line is disabled after the backend changed to send the token as HttpOnly cookie
-                    // localStorage.setItem('token', data.value);
-                    // console.log("localStorage in login");
-                    // console.log(localStorage);
-                    // console.log("localStorage in login-E");
-                getUserType()
-                .then(data => {                        
-                    if (data === "ADMIN") {
-                        window.location.href = '/AdminDashboard';
-                    } else {
-                        window.location.href = '/UserDashboard';
-                    }
+                // a suucessfull login will return the user roles in the body of the response
+                response.json()
+                .then(data => {
+                    localStorage.clear();
+                    const parameterName = process.env.REACT_APP_LOCAL_STORAGE_USER_ROLES
+                    localStorage.setItem(parameterName, data.parameterName);
                 })
+                const userMainRole = GetUserMainRoleFromLocalStorage();
+                if (userMainRole === "ADMIN") {
+                    window.location.href = '/AdminDashboard';
+                } else {
+                    window.location.href = '/UserDashboard';
+                }
                 // });
             } else {
                 setChildren(
