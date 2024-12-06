@@ -11,6 +11,7 @@ const LogoutForm = () => {
         PostRequestMaker(url, {})
         .then(response => {
             if(response.status === 200){
+                localStorage.clear();
                 window.location.href = '/login';
             } else {
                 setChildren(
@@ -24,7 +25,7 @@ const LogoutForm = () => {
 
     const handleCancelLogout = () => {
         // Todo: this should be changed to the dashboard and there should be no difference whether it is user or admin
-        window.location.href = '/AdminDashboard';
+        window.location.href = '/Dashboard';
     }
 
     return (

@@ -18,7 +18,11 @@ const NewOrganization = () => {
         ["superuser_email", "Super User Email Address", "example@abc.com"],
         ["superuser_password", "Super User Password", "password"]
     ];
-    const [formValues,setFormValues] = useState({});
+    let initiateFormValue = {}
+    allParameters.forEach((oneParameter) => {
+        initiateFormValue[oneParameter[0]] = '';
+    }); 
+    const [formValues,setFormValues] = useState(initiateFormValue);
     const [newOrganization, setNewOrganization] = useState('');
     const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
     return (

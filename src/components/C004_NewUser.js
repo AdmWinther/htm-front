@@ -2,10 +2,10 @@ import React, { useState } from "react";
 
 
 import LabelInput from "./C000_LabelInput";
-import DropDownList from "./C000_DropDownList";
+// import DropDownList from "./C000_DropDownList";
 import DoubleCheckFormValues from "./C014_DoubleCheckFormValues";
 
-function NewUserPanel() {
+function NewUser() {
 	const postRequestAddress = process.env.REACT_APP_BACKEND_URL+process.env.REACT_APP_ENDPOINT_NEW_USER;
 
 	let labelInputParameters= [
@@ -15,11 +15,16 @@ function NewUserPanel() {
 		["password", "Password", "password"]
 	];
 
-    let dropdownParameters = [
-        "role", "Role", process.env.REACT_APP_USER_ROLES.split(",")
-    ];    
+    let initiateFormValue = {}
+    labelInputParameters.forEach((oneParameter) => {
+        initiateFormValue[oneParameter[0]] = '';
+    });
+
+    // let dropdownParameters = [
+    //     "role", "Role", process.env.REACT_APP_USER_ROLES.split(",")
+    // ];    
     
-    const [formValues,setFormValues] = useState({});
+    const [formValues,setFormValues] = useState(initiateFormValue);
     const [newUser, setNewUser] = useState('');
     const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
 
@@ -31,7 +36,7 @@ function NewUserPanel() {
 				);
 			})}
             
-            <DropDownList key={"NewUserFormDropDownList"} parameter={dropdownParameters} setStateFunction={setFormValues} theState={formValues}/>
+            {/* <DropDownList key={"NewUserFormDropDownList"} parameter={dropdownParameters} setStateFunction={setFormValues} theState={formValues}/> */}
             
 			<div className="d-grid gap-2">
 				<button
@@ -51,4 +56,4 @@ function NewUserPanel() {
 	);
 }
 
-export default NewUserPanel;
+export default NewUser;

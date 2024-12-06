@@ -2,17 +2,17 @@ import React from "react";
 import SidebarPlusPanel from "./C002_0_SidebarAndPanel";
 import GetUserMainRoleFromLocalStorage from "../services/GetUserMainRoleFromLocalStorage";
 
-const MyUsersPanel = () => {
+const ProjectPanel = () => {
     let SidebarOptions = [];
     const userMainRole = GetUserMainRoleFromLocalStorage();
 
     //Decide the sidebar options based on the user's main role
     if(userMainRole.toLowerCase() === 'admin') {
-        SidebarOptions = ['AllUsers'];
+        SidebarOptions = ['AllProjects'];
     } else if(userMainRole.toLowerCase() === 'superuser') {
-        SidebarOptions = ['NewUser', 'AllUsers'];
+        SidebarOptions = ['NewProject', 'AllProjects'];
     } else {
-        console.log("Error, new user type has users as a tab in the Dashboard but the sidebar options are not stated")
+        console.log("Error, new user type has projects as a tab in the Dashboard but the sidebar options are not stated")
     }
 
     return (
@@ -20,4 +20,4 @@ const MyUsersPanel = () => {
     );
 }
 
-export default MyUsersPanel;
+export default ProjectPanel;

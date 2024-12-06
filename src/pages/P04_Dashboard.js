@@ -12,10 +12,10 @@
 
 
 import React, {useState, useEffect} from 'react';
-import getUserType from '../services/getUserType';
 import NavigationBar from '../components/C003_NavigationBar';
 import { Outlet } from 'react-router-dom';
 import Double from '../classes/Double';
+import GetUserMainRoleFromLocalStorage from '../services/GetUserMainRoleFromLocalStorage';
 
 const Dashboard = () => {
 
@@ -23,18 +23,19 @@ const Dashboard = () => {
     // if(process.env.REACT_APP_Verbose)console.log(process.env.REACT_APP_Verbose);
     useEffect(() => {
 
-        getUserType()
-        .then(data => {
-            if (String(data).toLowerCase() === 'admin') {
-                console.log("JWT token: "+document.cookie);
+        const userMainRole = GetUserMainRoleFromLocalStorage();
+        if (userMainRole.toLowerCase() === 'admin') {
                 //Admin dashboard tabs
                 setDashboardTabs([new Double('Users','Users'), new Double('Organizations', 'Organizations'), new Double('MyProjects', 'Projects')]);
-            } else if (String(data).toLowerCase() === 'user'){
+        } 
+        else if (userMainRole.toLowerCase() === 'superuser'){
                 //User dashboard tabs
-                console.log("JWT token: "+document.cookie);
-                setDashboardTabs([new Double('Users','Users'), new Double('Projects','Projects'), new Double('Account', 'Account')]);
-            }
-        })
+                setDashboardTabs([new Double('Users','Users'), new Double('Projects','Projects'), new Double('Account', 'Account'), new Double('Settings', 'Settings')]);
+        } 
+        else if (userMainRole.toLowerCase() === 'user'){
+                //User dashboard tabs
+                setDashboardTabs([new Double('Projects','Projects'), new Double('Settings', 'Settings')]);
+        }
     }, []);
 
     return (

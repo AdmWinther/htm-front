@@ -10,7 +10,7 @@ const DoubleCheckFormValues = (formValues, setNewOrganization, setSubmitButtonDi
     //for loop on formFields
     const enteredValues = formFields.map((field) => {
         return (
-                <p key={"NewOrganizationConfirm"+field}>{field}: {formValues[field]}</p>
+                <p key={field}>{field}: {formValues[field]}</p>
         );
     })
 
@@ -54,18 +54,15 @@ function Cancel(setNewOrganization, setSubmitButtonDisabled) {
 function Confirm(formValues, setNewOrganization, setSubmitButtonDisabled, postRequestAddress) {
     if(process.env.REACT_APP_Verbose) console.log("Confirm is called");
     PostRequestMaker(postRequestAddress, formValues)
-    .then((response) => {
-        if(response.status === 200) {
-            return response.json();
-        }else{
-            console.log("Error.");
-            console.log(response);
-            console.log("Error.");
-            return {message: "Error."};
+    .then((response) => { return response.json();})
+    .then((data) => {
+        if(process.env.REACT_APP_Verbose) console.log(data);
+        if(data.error === undefined) {
+            setNewOrganization(<p style={{color: "green"}}>{data.message}</p>);
+        } else {
+            setNewOrganization(<p style={{background:"yellow", color: "red"}}>{data.error}</p>);
         }
-    }).then((response) => {
-        if(process.env.REACT_APP_Verbose)console.log(response);
         setSubmitButtonDisabled(false);
-        setNewOrganization(<p style={{color: "red"}}>{response.message}</p>);
+        
     })
 }

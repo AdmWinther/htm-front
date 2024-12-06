@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import PostRequestMaker from '../services/PostRequestMaker';
-import GetUserMainRoleFromLocalStorage from '../services/GetUserMainRoleFromLocalStorage';
+// import GetUserMainRoleFromLocalStorage from '../services/GetUserMainRoleFromLocalStorage';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -27,14 +27,11 @@ const LoginForm = () => {
                 .then(data => {
                     localStorage.clear();
                     const parameterName = process.env.REACT_APP_LOCAL_STORAGE_USER_ROLES
-                    localStorage.setItem(parameterName, data.parameterName);
+                    localStorage.setItem(parameterName, data[parameterName]);
                 })
-                const userMainRole = GetUserMainRoleFromLocalStorage();
-                if (userMainRole === "ADMIN") {
-                    window.location.href = '/AdminDashboard';
-                } else {
-                    window.location.href = '/UserDashboard';
-                }
+                
+                window.location.href = '/Dashboard';
+                
                 // });
             } else {
                 setChildren(

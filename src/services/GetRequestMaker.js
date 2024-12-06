@@ -1,5 +1,3 @@
-// import getCsrfToken from './getCsrfToken';
-
 function GetRequestMaker(url) {
     return new Promise((resolve, reject) => {
         fetch(url, {
@@ -16,10 +14,15 @@ function GetRequestMaker(url) {
         .then(response => {
             if(response.status === 200){
                 return response
-            } else {
+            } else if(response.status === 401) {
+                window.location.href = '/error401';
+            } else if(response.status === 403) {
+                window.location.href = '/error403';
+            }          
+            else {
                 throw new Error('Failed to get user type');
             }
-         })
+        })
         // )
         .then(response => {
             resolve(response);
