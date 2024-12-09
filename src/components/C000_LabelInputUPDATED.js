@@ -9,12 +9,18 @@
 import React from "react";
 //import MakeItReadable from "../services/MakeItReadable"
 
+const LabelInputUPDATED =({LabelInputProperties, setStateFunction, theState, enterFunction})=> {
 
-const LabelInput =({parameter, setStateFunction, theState})=> {
-    // console.log(parameter);
-    let field = parameter[0];
-    let display = parameter[1];
-    let placeholder = parameter[2];
+    let field = LabelInputProperties.DataLayer();
+    let display = LabelInputProperties.Label();
+    let placeholder = LabelInputProperties.PlaceHolder();
+
+    const handleKeyPress = event => {
+        if (event.key === 'Enter') {
+            enterFunction();
+        }
+    };
+
     return (
         <div key={field}>
             <label
@@ -26,34 +32,34 @@ const LabelInput =({parameter, setStateFunction, theState})=> {
             <input
                 key={field}
                 type={
-                    parameter === "Password" ? "password" : "text"
+                    LabelInputProperties.DataLayer() === "Password" ? "password" : "text"
                 }
                 id={field}
                 className="form-control"
                 placeholder={placeholder}
+                onKeyDown={handleKeyPress}
                 onChange={(event) => {
                  	let newInputValue = event.target.value;
-                 	const currentKeys = Object.keys(theState);
+                 	// const currentKeys = Object.keys(theState);
 
 
                     if(field === "emailAddress"){
                         //making sure the email address is in lowercase.
                         newInputValue = newInputValue.toLowerCase();
                     }
-
-
+                    setStateFunction({...theState, [field]: newInputValue});
 
 
                     
-                    if(currentKeys.includes(field)) {
-                        setStateFunction({...theState, [field]: newInputValue});
-                    } else {
-                        setStateFunction({...theState, [field]: newInputValue});
-                    }
+                    // if(currentKeys.includes(field)) {
+                    //     setStateFunction({...theState, [field]: newInputValue});    
+                    // } else {
+                    //     setStateFunction({...theState, [field]: newInputValue});
+                    // }
                  }}
             />
         </div>
     )
 }
 
-export default LabelInput;
+export default LabelInputUPDATED;

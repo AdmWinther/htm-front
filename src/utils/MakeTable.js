@@ -8,11 +8,11 @@ const makeTable = (data, tableHeaders) => {
         </thead>
     )
 
-    const columnKeys = Object.keys(data[1])
+    const columnKeys = Object.keys(data[0])
     let rows = data.map((row, index) => {
 
         let rowContent = []
-        rowContent.push(<th key="index" scope="col">{index}</th>)
+        rowContent.push(<th key="index" scope="col">{index+1}</th>)
 
         columnKeys.forEach(element => {
             rowContent.push(<td key={element+row} >{row[element]}</td>)

@@ -1,43 +1,42 @@
-import React from "react";
-
-const DropDownList = ({parameter, setStateFunction, theState}) => {
+import React, { useEffect } from "react";
 
 
-    let field = parameter[0];
-    let display = parameter[1];
-    let placeholder = parameter[2];
-    const options = placeholder.map(
+const DropDownList = ({dropDownListProperties, optionsList, setStateFunction, theState, display1, display2, display3=null}) => {
+    useEffect(() => {
+        if(Object.keys(optionsList).length > 0){
+            setStateFunction({...theState, [dropDownListProperties.DataLayer()]:optionsList[0].id})
+        }
+    },[])
+    // "fieldName" is used as key to save the value of drop down in the object which will be sent to the backend.
+    const options = optionsList.map(
         (option) => {
-            return (
-                <option key={option} value={option}>{option}</option>
-            )
+            if(display2 ===null & display3 ===null) {
+                return (
+                    <option key={option[display1]} value={option["id"]}>{option[display1]}</option>
+                )
+            }
+            if(display2 !==null & display3 ===null) {
+                return (
+                    <option key={option[display1]+option[display2]} value={option["id"]}>{option[display1]+" "+option[display2]}</option>
+                )
+            }
+            return <option key={option[display1]+option[display2]+option[display3]} value={option["id"]}>{option[display1]+" "+option[display2]+" "+option[display3]}</option>
         }
     )
-    return (
-
-
-
-
-
-        
-        <label className="form-label" key={field}> {display}
-            <select className="form-select" placeholder="Role" onChange={(event) =>{updateTheState(event, setStateFunction, theState, field)}}>
+    return (        
+        <label className="form-label" key={dropDownListProperties.DataLayer()}> {dropDownListProperties.Label()}
+            <select className="form-select" placeholder="Role" onChange={(event) =>{updateTheState(event, setStateFunction, theState, dropDownListProperties.DataLayer())}}>
                 {options}
             </select>
         </label>
     );
 }
 
-const updateTheState = (event, setStateFunction, theState, field) => {
+const updateTheState = (event, setStateFunction, theState, fieldName) => {
 
     let newInputValue = event.target.value;
-    const currentKeys = Object.keys(theState);
-    if(currentKeys.includes(field)) {
-        setStateFunction({...theState, [field]: newInputValue});
-    } else {
-        setStateFunction({...theState, [field]: newInputValue});
-    }
-    console.log("theState", theState);
+    console.log(event)
+    setStateFunction({...theState, [fieldName]: newInputValue});
 }
 
 
