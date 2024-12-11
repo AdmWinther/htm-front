@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import LabelInput from "./C000_LabelInput";
-import DoubleCheckFormValues from "./C014_DoubleCheckFormValues";
-
+import FormFieldProperties from "../utils/FormFieldProperties";
+import FormMaker from "../utils/FormMaker";
 
 
 
@@ -10,55 +8,16 @@ const NewOrganization = () => {
 
     const postRequestAddress = process.env.REACT_APP_BACKEND_URL+
         process.env.REACT_APP_ENDPOINT_NEW_ORGANIZATION;
-    let allParameters= [
-        ["organization_name", "Organization Name", "My Organization"],
-        ["description", "Description", "Description"],
-        ["superuser_name", "Super User Name", "John"], 
-        ["superuser_lastname", "Super User Last Name", "Doe"],
-        ["superuser_email", "Super User Email Address", "example@abc.com"],
-        ["superuser_password", "Super User Password", "password"]
+
+    let formFieldsPropertiesList= [
+        new FormFieldProperties("LabelInput","organization_name",   "Organization Name",        "New Organization"),
+        new FormFieldProperties("LabelInput","description",         "Description",              "This new organization produces ..."),
+        new FormFieldProperties("LabelInput","superuser_name",      "Superuser Name",           "John"),
+        new FormFieldProperties("LabelInput","superuser_lastname",  "Superuser Last Name",      "Doe"),
+        new FormFieldProperties("LabelInput","superuser_email",     "Superuser Email Address",  "example@abc.com"),
+        new FormFieldProperties("LabelInput","superuser_password",  "Superuser Password",       "password")
     ];
-    let initiateFormValue = {}
-    allParameters.forEach((oneParameter) => {
-        initiateFormValue[oneParameter[0]] = '';
-    }); 
-    const [formValues,setFormValues] = useState(initiateFormValue);
-    const [newOrganization, setNewOrganization] = useState('');
-    const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
-    return (
-        <div className="container-fluid">
-			{allParameters.map(( oneParameter, index) => {
-				return (
-					<LabelInput 
-                        key={"NewOrganizationFormLabelInput"+index}
-                        parameter={oneParameter}
-                        setStateFunction={setFormValues}
-                        theState={formValues}
-                    />
-				);
-			})}
-			<div className="d-grid gap-2">
-				<button
-					key="SubmitButton"
-					className="btn btn-primary"
-					type="button"
-                    disabled = {submitButtonDisabled}
-					onClick={
-                        ()=>DoubleCheckFormValues(
-                            formValues,
-                            setNewOrganization,
-                            setSubmitButtonDisabled,
-                            postRequestAddress)
-                    }
-				>
-                    {"Submit"}
-				</button>
-			</div>
-            <div>
-                {newOrganization}
-            </div>
-		</div>
-    );
+    return FormMaker(formFieldsPropertiesList,postRequestAddress)
 }
 
 

@@ -24,20 +24,10 @@ const FormMaker = (formFieldsPropertiesList, postURL) => {
 
     
     const [doubleCheck, setDoubleCheck] = useState('');
-    const [submitResult, setSubmitResult] = useState('')
+    // const [submitResult, setSubmitResult] = useState('')
     const [isFormDisabled, setIsFormDisabled] = useState(false);
 
     const enterFunction = ()=> {DoubleCheckFormValues(formValues, setDoubleCheck, setIsFormDisabled, postURL)}
-    // const fakeEnterFunction = ()=> {
-    //     console.log("enter is pressed.")
-    //     console.log(formValues)
-    //     setDoubleCheck("doubleCheck is changed.")
-    //     setSubmitResult(
-    //         <p style={{color: "red"}}>
-    //             "doubleCheck is changed."
-    //         </p>
-    //     )
-    // }
 
     let formComponents = formFieldsPropertiesList.map((field, index)=>{
         if(field.InputType() ==="LabelInput"){
@@ -88,10 +78,10 @@ const FormMaker = (formFieldsPropertiesList, postURL) => {
             <div key={"form"}>
                 {formComponents}
             </div>
-            {/* {submitButton} */}
+            {/* {submitButton}
             <div key={"submitResult"}>
                 {submitResult}
-            </div>
+            </div> */}
             <div key={"doubleCheck"}>
                 {doubleCheck}
             </div>

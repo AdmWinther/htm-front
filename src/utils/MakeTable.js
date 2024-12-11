@@ -7,32 +7,41 @@ const makeTable = (data, tableHeaders) => {
             </tr>
         </thead>
     )
+    if(data[0]) {
 
-    const columnKeys = Object.keys(data[0])
-    let rows = data.map((row, index) => {
-
-        let rowContent = []
-        rowContent.push(<th key="index" scope="col">{index+1}</th>)
-
-        columnKeys.forEach(element => {
-            rowContent.push(<td key={element+row} >{row[element]}</td>)
-        });
-        
-        return (
-            <tr key={index}>
+        const columnKeys = Object.keys(data[0])
+        let rows = data.map((row, index) => {
+            
+            let rowContent = []
+            rowContent.push(<th key="index" scope="col">{index+1}</th>)
+            
+            columnKeys.forEach(element => {
+                rowContent.push(<td key={element+row} >{row[element]}</td>)
+            });
+            
+            return (
+                <tr key={index}>
                 {rowContent}
             </tr>
         );
     });
-
-    let table = 
-    <table className="table">
+    
+    return(
+        <table className="table">
         {tableHeaderTag}
         <tbody>
             {rows}
         </tbody>
-    </table>
-    return table;
+        </table>
+    ) 
+    } else {
+        return (
+            <table className="table">
+            {tableHeaderTag}
+            </table>
+    
+        )
+    }
 }
 
 export default makeTable;

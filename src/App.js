@@ -21,6 +21,7 @@ import AllOrganization from './components/C011_AllOrganization';
 
 import ProjectPanel from './components/C019-ProjectPanel';
 import NewProject from './components/C021_NewProject';
+import AllProjects from './components/C022_AllProjects';
 
 import Error401Page from './pages/P05_Error401Page';
 import Error404Page from './pages/P05_Error404Page';
@@ -54,9 +55,9 @@ function App() {
                         </Route>
                         
                         <Route path="Projects" element={<ProjectPanel/>}>
-                            <Route index element={<h1>AllProjects</h1>} />
+                            <Route index element={<AllProjects/>}/>
                             <Route path="NewProject" element={<NewProject/>} />
-                            <Route path="AllProjects" element={<h1>Here is All PRojects.</h1>}/>
+                            <Route path="AllProjects" element={<AllProjects/>}/>
                             <Route path="*" element={<Error404Page />} />
                         </Route>
                         <Route path="Account" element={<h1>Account</h1>} />

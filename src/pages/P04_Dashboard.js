@@ -26,7 +26,7 @@ const Dashboard = () => {
         const userMainRole = GetUserMainRoleFromLocalStorage();
         if (userMainRole.toLowerCase() === 'admin') {
                 //Admin dashboard tabs
-                setDashboardTabs([new Double('Users','Users'), new Double('Organizations', 'Organizations'), new Double('MyProjects', 'Projects')]);
+                setDashboardTabs([new Double('Users','Users'), new Double('Organizations', 'Organizations'), new Double('Projects', 'Projects')]);
         } 
         else if (userMainRole.toLowerCase() === 'superuser'){
                 //User dashboard tabs
