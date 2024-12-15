@@ -3,7 +3,7 @@ import React from 'react';
 
 const Error401Page = () => {
   return (
-    <div>
+    <div className="d-flex flex-column justify-content-center align-items-center" style={{ height: '100vh' }}>
       <h1>Error 401: Unauthorized</h1>
       <p>Sorry, you are not authorized to access this page.</p>
       <p>Your session has ended. Please login again.</p>

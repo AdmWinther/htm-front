@@ -22,6 +22,7 @@ import AllOrganization from './components/C011_AllOrganization';
 import ProjectPanel from './components/C019-ProjectPanel';
 import NewProject from './components/C021_NewProject';
 import AllProjects from './components/C022_AllProjects';
+import OpenProject from './components/C023_OpenProject';
 
 import Error401Page from './pages/P05_Error401Page';
 import Error404Page from './pages/P05_Error404Page';
@@ -58,12 +59,14 @@ function App() {
                             <Route index element={<AllProjects/>}/>
                             <Route path="NewProject" element={<NewProject/>} />
                             <Route path="AllProjects" element={<AllProjects/>}/>
+                            <Route path="openproject/:id" element={<OpenProject/>} />
                             <Route path="*" element={<Error404Page />} />
                         </Route>
                         <Route path="Account" element={<h1>Account</h1>} />
                         <Route path="Settings" element={<Settings/>} />
                     </Route>
-                    <Route path="*" element={<Error404Page />} />
+                    {/* <Route path="/openproject/:id" element={<OpenProject/>} /> */}
+                    {/* <Route path="*" element={<Error404Page />} /> */}
                     <Route path = "error401" element= {<Error401Page/>}/>
                     <Route path = "error404" element= {<Error404Page/>}/>
                     <Route path="/confirmLogout" element={<LogoutForm />} />

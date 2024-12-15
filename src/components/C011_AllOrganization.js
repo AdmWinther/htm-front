@@ -1,9 +1,11 @@
 import React, {useState, useEffect } from "react";
 import GetRequestMaker from "../services/GetRequestMaker";
-import makeTable from "../utils/MakeTable";
+import MakeTable from "../utils/MakeTable";
 
 function AllOrganization() {
     const [OrganizationList, SetOrganizationList] = useState([]);
+
+    const OpenOrganization = (organizationId)=> {console.log("Open OrganizationInfo page for Org.ID:", organizationId)}
 
 
     useEffect(() => {
@@ -11,7 +13,12 @@ function AllOrganization() {
         GetRequestMaker(url)
         .then(response => response.json())
         .then(data => { 
-            let table = makeTable(data, ['#','id','Name', 'Description'])
+            // let table = MakeTable(data, ['#','Organization Name', 'Superuser Name', 'Superuser Lastname', 'Superuser Email Address'])
+            let table = <MakeTable
+                data = {data}
+                tableHeaders={['#','Organization Name', 'Superuser Name', 'Superuser Lastname', 'Superuser Email Address']}
+                handleClick={OpenOrganization}
+            />
             SetOrganizationList(table);
         })
     }, []);
