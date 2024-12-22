@@ -10,10 +10,10 @@ const FormMaker = (formFieldsPropertiesList, postURL) => {
             let initiateFormValue = {}
             //Make the initializer of the formValues object
             formFieldsPropertiesList.forEach((field) => {
-                if(field.InputType() === "LabelInput"){
+                if(field.Type() === "LabelInput"){
                     initiateFormValue[field.DataLayer()] = '';
                 }
-                if(field.InputType() === "DropDownList"){
+                if(field.Type() === "DropDownList"){
                     initiateFormValue[field.DataLayer()] = field.OptionsList()[0]['id'];
                 }
             })
@@ -30,7 +30,7 @@ const FormMaker = (formFieldsPropertiesList, postURL) => {
     const enterFunction = ()=> {DoubleCheckFormValues(formValues, setDoubleCheck, setIsFormDisabled, postURL)}
 
     let formComponents = formFieldsPropertiesList.map((field, index)=>{
-        if(field.InputType() ==="LabelInput"){
+        if(field.Type() ==="LabelInput"){
             return (
                 <LabelInputUPDATED 
                     key={"formObject"+index+"_"+field.DataLayer()} 
@@ -42,7 +42,7 @@ const FormMaker = (formFieldsPropertiesList, postURL) => {
                 />
             );
         }
-        if(field.InputType()==="DropDownList"){
+        if(field.Type()==="DropDownList"){
             return(
                 <DropDownList
                     key={"NewUserFormDropDownList"}

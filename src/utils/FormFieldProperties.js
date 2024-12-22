@@ -1,12 +1,12 @@
 class FormFieldProperties{
     //a class with 3 fields, dataLayerName, displayName, and placeHolder
-    constructor(inputType, dataLayerName, label, placeHolder, optionsList=null) {
+    constructor(type, dataLayerName, label, placeHolder, optionsList=null) {
         
-        let allowedInputTypes = ["LabelInput", "DropDownList"]
-        if(allowedInputTypes.includes(inputType)){
-            this.inputType = inputType;
+        let allowedTypes = ["LabelInput", "DropDownList"]
+        if(allowedTypes.includes(type)){
+            this.type = type;
         }else{
-            throw new Error("Invalid inputType")
+            throw new Error("Invalid Type")
         }
         
         this.dataLayerName = dataLayerName;
@@ -15,8 +15,8 @@ class FormFieldProperties{
         this.optionsList = optionsList
     }
 
-    InputType(){
-        return this.inputType
+    Type(){
+        return this.type
     }
 
     DataLayer(){

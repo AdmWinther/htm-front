@@ -1,26 +1,15 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import PostRequestMaker from "../services/PostRequestMaker";
 
-const UpdatableStringField = ({projectId, requestUrl, updateUrl, label, dataLayerLabel}) => {
+function UpdatableLabelInput({updateUrl, fieldProperties}) {
     
-    const [fieldValue, setFieldValue] = useState('')
+    const [fieldValue, setFieldValue] = useState(fieldProperties.PlaceHolder())
     const [fieldReadOnly, setFieldReadOnly] = useState(true)
     const [update, setUpdate] = useState(true)
     const [isEditButtonDisabled, setIsEditButtonDisabled] = useState(false)
     const [isConfirmButtonDisabled, setIsConfirmButtonDisabled] = useState(true)
-    
-    useEffect(
-        ()=>{
-            PostRequestMaker(requestUrl, {"prop":"name", "projectId": projectId}, false)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                setFieldValue(data)
-                setUpdate(data)
-                return true
-            })
-        },[]
-    )
+
+    let label = fieldProperties.Label()
 
     const handleClickEdit = ()=>{
         setFieldReadOnly(false)
@@ -42,21 +31,21 @@ const UpdatableStringField = ({projectId, requestUrl, updateUrl, label, dataLaye
     }
 
     return(
-        <div className="container">
-            <div className="row">
-                <div className="col-2">
+        <div>
+            <div className="row align-items-center">
+                <div className="col-2 form-label">
                     <label className="form-label" htmlFor="username">{label}</label>
                 </div>
-                <div className="col-6">
+                <div className="col-6 ">
                     <input className="form-control"
-                        value={update}
+                        value={fieldValue}
                         readOnly={fieldReadOnly}
                         onChange={e => setUpdate(e.target.value)}
                     />
                 </div>
-                <div className="col">
+                <div className="col-md-auto ">
                     <button 
-                        className="btn btn-primary" 
+                        className="btn btn-primary d-grid gap-2" 
                         onClick={handleClickEdit}
                         disabled={isEditButtonDisabled}
                         >
@@ -64,9 +53,9 @@ const UpdatableStringField = ({projectId, requestUrl, updateUrl, label, dataLaye
                     </button>
                 </div>
 
-                <div className="col">
+                <div className="col-md-auto ">
                     <button 
-                        className="btn btn-primary" 
+                        className="btn btn-primary d-grid gap-2" 
                         onClick={handleClickConfirm}
                         disabled={isConfirmButtonDisabled}
                         >
@@ -78,4 +67,4 @@ const UpdatableStringField = ({projectId, requestUrl, updateUrl, label, dataLaye
     )
 }
 
-export default UpdatableStringField
+export default UpdatableLabelInput
