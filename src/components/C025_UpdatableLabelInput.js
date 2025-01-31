@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import PostRequestMaker from "../services/PostRequestMaker";
 
-function UpdatableLabelInput({updateUrl, fieldProperties}) {
+
+function UpdatableLabelInput({fieldProperties, setStateFunction, theState, updateUrl}) {
     
     const [fieldValue, setFieldValue] = useState(fieldProperties.PlaceHolder())
     const [fieldReadOnly, setFieldReadOnly] = useState(true)
@@ -9,6 +10,7 @@ function UpdatableLabelInput({updateUrl, fieldProperties}) {
     const [isEditButtonDisabled, setIsEditButtonDisabled] = useState(false)
     const [isConfirmButtonDisabled, setIsConfirmButtonDisabled] = useState(true)
 
+    let field = fieldProperties.DataLayer();
     let label = fieldProperties.Label()
 
     const handleClickEdit = ()=>{
@@ -31,19 +33,25 @@ function UpdatableLabelInput({updateUrl, fieldProperties}) {
     }
 
     return(
-        <div>
+        <div key={field}>
+            <div className="col-2 form-label">
+                <label className="form-label" htmlFor="username">{label}</label>
+            </div>
             <div className="row align-items-center">
-                <div className="col-2 form-label">
-                    <label className="form-label" htmlFor="username">{label}</label>
-                </div>
-                <div className="col-6 ">
+                <div className="col-9 ">
                     <input className="form-control"
                         value={fieldValue}
                         readOnly={fieldReadOnly}
-                        onChange={e => setUpdate(e.target.value)}
+                        onChange={
+                            e => {
+                                setFieldValue(e.target.value)
+                                setStateFunction({...theState, [field]: e.target.value});
+                            }
+                        }
                     />
-                </div>
-                <div className="col-md-auto ">
+                </div>                
+                
+                <div className="col-1">
                     <button 
                         className="btn btn-primary d-grid gap-2" 
                         onClick={handleClickEdit}
@@ -52,8 +60,10 @@ function UpdatableLabelInput({updateUrl, fieldProperties}) {
                         Edit
                     </button>
                 </div>
+                
+                
 
-                <div className="col-md-auto ">
+                <div className="col-1">
                     <button 
                         className="btn btn-primary d-grid gap-2" 
                         onClick={handleClickConfirm}

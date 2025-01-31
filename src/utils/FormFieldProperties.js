@@ -2,7 +2,7 @@ class FormFieldProperties{
     //a class with 3 fields, dataLayerName, displayName, and placeHolder
     constructor(type, dataLayerName, label, placeHolder, optionsList=null) {
         
-        let allowedTypes = ["LabelInput", "DropDownList"]
+        let allowedTypes = ["LabelInput", "DropDownList", "NotUpdatableLabelInput", "UpdatableLabelInput"]
         if(allowedTypes.includes(type)){
             this.type = type;
         }else{

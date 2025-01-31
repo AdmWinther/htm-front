@@ -12,7 +12,7 @@ const ProjectPanel = () => {
     } else if(userMainRole.toLowerCase() === 'superuser') {
         SidebarOptions = ['NewProject', 'AllProjects'];
     } else {
-        console.log("Error, new user type has projects as a tab in the Dashboard but the sidebar options are not stated")
+        console.log(`Error,  user type " ${userMainRole.toLowerCase()}" has projects as a tab in the Dashboard but the sidebar options are not stated`)
     }
 
     return (

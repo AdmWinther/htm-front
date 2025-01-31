@@ -1,23 +1,27 @@
-import React, {useState, useEffect} from "react";
-import PostRequestMaker from "../services/PostRequestMaker";
-import FormFieldProperties from "../utils/FormFieldProperties";
+import React from "react";
 
-function NOTUpdatableLabelInput({projectId, fieldProperties, updateUrl=null}) {
-    
-    
+function NOTUpdatableLabelInput({fieldProperties}) {
+    let field = fieldProperties.DataLayer();
+    let display = fieldProperties.Label();
+    let placeholder = fieldProperties.PlaceHolder();
+
     return(
-        <div>
-            <div className="row align-items-center">
-                <div className="col-2 form-label">
-                    <label className="form-label" htmlFor="username">{fieldProperties.Label()}</label>
-                </div>
-                <div className="col-6 ">
-                    <input className="form-control"
-                        value={fieldProperties.PlaceHolder()}
-                        readOnly={true}
-                    />
-                </div>
-            </div>
+        <div key={field}>
+            <label 
+                className="form-label" 
+                htmlFor="username"
+            >
+                {display}
+            </label>    
+            <input
+                key={field}
+                type={
+                    fieldProperties.DataLayer() === "Password" ? "password" : "text"
+                }
+                className="form-control"
+                value={fieldProperties.PlaceHolder()}
+                readOnly={true}
+            />
         </div>
     )
 }

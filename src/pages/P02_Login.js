@@ -25,9 +25,15 @@ const LoginForm = () => {
                 // a suucessfull login will return the user roles in the body of the response
                 response.json()
                 .then(data => {
+                    //print the JWT token
                     localStorage.clear();
                     const parameterName = process.env.REACT_APP_LOCAL_STORAGE_USER_ROLES
+                    console.log("JWT token:", data.roles);
+                    console.log("parameterName:", parameterName);
+                    console.log("data[parameterName]:", data[parameterName]);
                     localStorage.setItem(parameterName, data[parameterName]);
+                    console.log("writing the userRole in local storage")
+                    console.log(data[parameterName])
                 })
                 
                 window.location.href = '/Dashboard';

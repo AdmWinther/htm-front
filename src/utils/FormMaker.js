@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import DoubleCheckFormValues from "../components/C014_DoubleCheckFormValues_Updated";
-import LabelInputUPDATED from "../components/C000_LabelInputUPDATED";
+import LabelInputUPDATED from "../components/C000_LabelInput";
 import DropDownList from "../components/C000_DropDownList";
+import NotUpdatableLabelInput from "../components/C026_NOTUpdatableLabelInput"
+import UpdatableLabelInput from "../components/C025_UpdatableLabelInput"
 
 const FormMaker = (formFieldsPropertiesList, postURL) => {
     const [formValues,setFormValues] = useState(null);
@@ -12,6 +14,12 @@ const FormMaker = (formFieldsPropertiesList, postURL) => {
             formFieldsPropertiesList.forEach((field) => {
                 if(field.Type() === "LabelInput"){
                     initiateFormValue[field.DataLayer()] = '';
+                }
+                if(field.Type() === "NotUpdatableLabelInput"){
+                    initiateFormValue[field.DataLayer()] = field.placeHolder();
+                }
+                if(field.Type() === "UpdatableLabelInput"){
+                    initiateFormValue[field.DataLayer()] = field.placeHolder();
                 }
                 if(field.Type() === "DropDownList"){
                     initiateFormValue[field.DataLayer()] = field.OptionsList()[0]['id'];
@@ -34,11 +42,29 @@ const FormMaker = (formFieldsPropertiesList, postURL) => {
             return (
                 <LabelInputUPDATED 
                     key={"formObject"+index+"_"+field.DataLayer()} 
-                    LabelInputProperties={field} 
+                    fieldProperties={field} 
                     setStateFunction={setFormValues} 
                     theState={formValues}
                     // enterFunction = {enterFunction}
                     enterFunction = {enterFunction}
+                />
+            );
+        }
+        if(field.Type() ==="NotUpdatableLabelInput"){
+            return (
+                <NotUpdatableLabelInput 
+                    key={"formObject"+index+"_"+field.DataLayer()} 
+                    fieldProperties={field}
+                />
+            );
+        }
+        if(field.Type() ==="UpdatableLabelInput"){
+            return (
+                <UpdatableLabelInput 
+                    key={"formObject"+index+"_"+field.DataLayer()} 
+                    fieldProperties={field}
+                    setStateFunction={setFormValues} 
+                    theState={formValues}
                 />
             );
         }

@@ -2,7 +2,7 @@ import getCsrfToken from './getCsrfToken';
 
 function PostRequestMaker(url, data, isItLogin = false) {
     // 
-    console.log("isItLogin: ", isItLogin);
+    //console.log("isItLogin: ", isItLogin);
     // let formData = {};
     // const dataKeys = Object.keys(data);
     // dataKeys.forEach(key => {
