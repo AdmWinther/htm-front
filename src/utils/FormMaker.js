@@ -1,52 +1,86 @@
 import { useEffect, useState } from "react";
 import DoubleCheckFormValues from "../components/C014_DoubleCheckFormValues_Updated";
-import LabelInputUPDATED from "../components/C000_LabelInput";
+import LabelInput from "../components/C000_LabelInput";
 import DropDownList from "../components/C000_DropDownList";
 import NotUpdatableLabelInput from "../components/C026_NOTUpdatableLabelInput"
 import UpdatableLabelInput from "../components/C025_UpdatableLabelInput"
 
 const FormMaker = (formFieldsPropertiesList, postURL) => {
     const [formValues,setFormValues] = useState(null);
+    const [doubleCheck, setDoubleCheck] = useState('');
+    //for each updateble label input, we need to set one flag. The submit button will be active
+    //only when all of the UpdatableLabelInputs are confirmed.
+    const [updatableLabelInputIsConfiremed, setUpdatableLabelInputIsConfiremed] = useState({})
+    //The submit button will be active only if all of the updatable label input fields are confirmed.
+    const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(false);
+    
+    //We need to initialize the formValues object. 
+    // This will be done only once, when the formFieldsPropertiesList
     useEffect(
         ()=>{
             let initiateFormValue = {}
+            let initializeUpdatableLabelInputIsConfiremed = {}
             //Make the initializer of the formValues object
             formFieldsPropertiesList.forEach((field) => {
                 if(field.Type() === "LabelInput"){
                     initiateFormValue[field.DataLayer()] = '';
                 }
                 if(field.Type() === "NotUpdatableLabelInput"){
-                    initiateFormValue[field.DataLayer()] = field.placeHolder();
+                    initiateFormValue[field.DataLayer()] = field.PlaceHolder();
                 }
                 if(field.Type() === "UpdatableLabelInput"){
-                    initiateFormValue[field.DataLayer()] = field.placeHolder();
+                    initiateFormValue[field.DataLayer()] = field.PlaceHolder();
+                    initializeUpdatableLabelInputIsConfiremed[field.DataLayer()]= true
+
                 }
                 if(field.Type() === "DropDownList"){
                     initiateFormValue[field.DataLayer()] = field.OptionsList()[0]['id'];
                 }
             })
             setFormValues(initiateFormValue)
+            setUpdatableLabelInputIsConfiremed(initializeUpdatableLabelInputIsConfiremed)
         },
-        []
+        [formFieldsPropertiesList]
     )
 
-    
-    const [doubleCheck, setDoubleCheck] = useState('');
-    // const [submitResult, setSubmitResult] = useState('')
-    const [isFormDisabled, setIsFormDisabled] = useState(false);
+    //We need to check if all of the updatable label inputs are confirmed. 
+    // If they are, we can enable the submit button. Any change in the updatableLabelInputIsConfiremed
+    // will trigger this useEffect.
+    useEffect(
+        ()=>{
+            let areAllTrue = true
+            let keys = Object.keys(updatableLabelInputIsConfiremed)
+            keys.forEach(
+                (key) =>{
+                    if(!updatableLabelInputIsConfiremed[key]){
+                        areAllTrue = false
+                    } 
+                }
+            )
+            if(areAllTrue){
+                setIsSubmitButtonDisabled(false)
+                console.log("All confirmed")
+            } else{
+                setIsSubmitButtonDisabled(true)
+                console.log("NOT confirmed")
+            }
+        },
+        [updatableLabelInputIsConfiremed]
+    )
 
-    const enterFunction = ()=> {DoubleCheckFormValues(formValues, setDoubleCheck, setIsFormDisabled, postURL)}
+    //This function will be called when the submit button is clicked.
+    const PreSubmit = ()=> {DoubleCheckFormValues(formValues, setDoubleCheck, setIsSubmitButtonDisabled, postURL)}
 
     let formComponents = formFieldsPropertiesList.map((field, index)=>{
         if(field.Type() ==="LabelInput"){
             return (
-                <LabelInputUPDATED 
+                <LabelInput 
                     key={"formObject"+index+"_"+field.DataLayer()} 
                     fieldProperties={field} 
                     setStateFunction={setFormValues} 
                     theState={formValues}
                     // enterFunction = {enterFunction}
-                    enterFunction = {enterFunction}
+                    enterFunction = {PreSubmit}
                 />
             );
         }
@@ -63,8 +97,11 @@ const FormMaker = (formFieldsPropertiesList, postURL) => {
                 <UpdatableLabelInput 
                     key={"formObject"+index+"_"+field.DataLayer()} 
                     fieldProperties={field}
-                    setStateFunction={setFormValues} 
+                    setStateFunction={setFormValues}
                     theState={formValues}
+                    isFormDisabled = {setIsSubmitButtonDisabled}
+                    updatableLabelInputIsConfiremed = {updatableLabelInputIsConfiremed}
+                    setUpdatableLabelInputIsConfiremed = {setUpdatableLabelInputIsConfiremed}
                 />
             );
         }
@@ -90,8 +127,8 @@ const FormMaker = (formFieldsPropertiesList, postURL) => {
                 key="SubmitButton"
                 className="btn btn-primary"
                 type="button"
-                disabled = {isFormDisabled}
-                onClick={()=>DoubleCheckFormValues(formValues, setDoubleCheck, setIsFormDisabled, postURL)}
+                disabled = {isSubmitButtonDisabled}
+                onClick={()=>DoubleCheckFormValues(formValues, setDoubleCheck, setIsSubmitButtonDisabled, postURL)}
             >
                 {"Submit"}
             </button>
@@ -104,10 +141,6 @@ const FormMaker = (formFieldsPropertiesList, postURL) => {
             <div key={"form"}>
                 {formComponents}
             </div>
-            {/* {submitButton}
-            <div key={"submitResult"}>
-                {submitResult}
-            </div> */}
             <div key={"doubleCheck"}>
                 {doubleCheck}
             </div>

@@ -1,7 +1,5 @@
 const GetUserMainRoleFromLocalStorage = () => {
     const userRolesString =  localStorage.getItem(process.env.REACT_APP_LOCAL_STORAGE_USER_ROLES);
-    console.log("userRolesString")
-    console.log(userRolesString)
     const userRolesArray = userRolesString.split(",");
     const userRolesArrayLowercase = userRolesArray.map(role => role.toLowerCase());
     if(userRolesArrayLowercase.includes('admin')){

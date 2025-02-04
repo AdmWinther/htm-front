@@ -5,7 +5,7 @@ import FormMaker from "../utils/FormMaker";
 
 function EditProjectInfo({projectId, previousPage}) {
 
-    const[formBluePrint, setFormBluePrint] = useState([])    
+    const[formBluePrint, setFormBluePrint] = useState([])
     
     useEffect(() => {
         let requestProjectPropUrl = process.env.REACT_APP_BACKEND_URL+"/api/project/requestProjectInfo"
@@ -16,7 +16,6 @@ function EditProjectInfo({projectId, previousPage}) {
         )
         .then(respons => respons.json())
         .then((data)=> {
-            console.log(data)
             
             let  formFieldPropertiesList = [];
             // Project Name field, it is updatable so it is enough to 

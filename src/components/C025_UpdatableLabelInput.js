@@ -1,12 +1,19 @@
 import React, {useState} from "react";
-import PostRequestMaker from "../services/PostRequestMaker";
 
 
-function UpdatableLabelInput({fieldProperties, setStateFunction, theState, updateUrl}) {
+function UpdatableLabelInput({
+                                fieldProperties,
+                                setStateFunction, 
+                                theState, 
+                                isFormDisabled,
+                                updatableLabelInputIsConfiremed,
+                                setUpdatableLabelInputIsConfiremed
+                            }) {
+
+    // let kabab = fieldProperties.PlaceHolder()
     
     const [fieldValue, setFieldValue] = useState(fieldProperties.PlaceHolder())
     const [fieldReadOnly, setFieldReadOnly] = useState(true)
-    const [update, setUpdate] = useState(true)
     const [isEditButtonDisabled, setIsEditButtonDisabled] = useState(false)
     const [isConfirmButtonDisabled, setIsConfirmButtonDisabled] = useState(true)
 
@@ -14,27 +21,28 @@ function UpdatableLabelInput({fieldProperties, setStateFunction, theState, updat
     let label = fieldProperties.Label()
 
     const handleClickEdit = ()=>{
+        //console.log("remember, the state is:", theState)
+        isFormDisabled(true)
         setFieldReadOnly(false)
         setIsEditButtonDisabled(true)
         setIsConfirmButtonDisabled(false)
+        setUpdatableLabelInputIsConfiremed({...updatableLabelInputIsConfiremed, [fieldProperties.DataLayer()]: false})
     }
 
     const handleClickConfirm = ()=>{
-        PostRequestMaker(updateUrl, {"name": update}, false)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            return true
-        })
+        //We need to trim after CONFIRM to make sure all excess blanks at the end are removed.
+        setFieldValue(fieldValue.trim())
+        setStateFunction({...theState, [fieldProperties.DataLayer()]:fieldValue.trim()})
+        isFormDisabled(false)
         setFieldReadOnly(true)
         setIsEditButtonDisabled(false)
         setIsConfirmButtonDisabled(true)
-        console.log("new value is:", update)
+        setUpdatableLabelInputIsConfiremed({...updatableLabelInputIsConfiremed, [fieldProperties.DataLayer()]: true})
     }
 
     return(
         <div key={field}>
-            <div className="col-2 form-label">
+            <div className="col-12 form-label">
                 <label className="form-label" htmlFor="username">{label}</label>
             </div>
             <div className="row align-items-center">
@@ -44,8 +52,9 @@ function UpdatableLabelInput({fieldProperties, setStateFunction, theState, updat
                         readOnly={fieldReadOnly}
                         onChange={
                             e => {
+                                // remove the blanks from the end of the entered value
                                 setFieldValue(e.target.value)
-                                setStateFunction({...theState, [field]: e.target.value});
+                                // kabab = e.target.value
                             }
                         }
                     />
