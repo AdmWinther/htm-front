@@ -15,8 +15,18 @@ function NewProject() {
             console.log(data)
 
             let  formFieldPropertiesList = [];
-            formFieldPropertiesList.push(new FormFieldProperties("LabelInput", "projectName", "Project Name", "My New Project"))
-            formFieldPropertiesList.push(new FormFieldProperties("LabelInput", "description", "Project Description", "this is a project to ..."))
+            formFieldPropertiesList.push(new FormFieldProperties(
+                "LabelInput", 
+                "projectName", 
+                "Project Name", 
+                "My New Project")
+            )
+            formFieldPropertiesList.push(new FormFieldProperties(
+                "LabelInput", 
+                "description", 
+                "Project Description", 
+                "This is a project to ...")
+            )
             formFieldPropertiesList.push(new FormFieldProperties(
                 "DropDownList", 
                 "projectManager", 

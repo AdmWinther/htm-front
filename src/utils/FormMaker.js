@@ -4,13 +4,22 @@ import LabelInput from "../components/C000_LabelInput";
 import DropDownList from "../components/C000_DropDownList";
 import NotUpdatableLabelInput from "../components/C026_NOTUpdatableLabelInput"
 import UpdatableLabelInput from "../components/C025_UpdatableLabelInput"
+import "./FormMake.css"
 
 const FormMaker = (formFieldsPropertiesList, postURL) => {
-    const [formValues,setFormValues] = useState(null);
-    const [doubleCheck, setDoubleCheck] = useState('');
+    const [formValues,setFormValues] = useState();
     //for each updateble label input, we need to set one flag. The submit button will be active
     //only when all of the UpdatableLabelInputs are confirmed.
+    //It is not necessary to initialize this state variable.
     const [updatableLabelInputIsConfiremed, setUpdatableLabelInputIsConfiremed] = useState({})
+
+    //After the submit button is clicked, the new values will be shown
+    //to the user and ask the user to double check and make sure these
+    //are the values that user intend to save.
+    //doubleCheck is a place holder for the pre-submit data double check.
+    //This will be later replaced with a pop-up message.
+    const [doubleCheck, setDoubleCheck] = useState('');
+
     //The submit button will be active only if all of the updatable label input fields are confirmed.
     const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(false);
     
@@ -19,18 +28,16 @@ const FormMaker = (formFieldsPropertiesList, postURL) => {
     useEffect(
         ()=>{
             let initiateFormValue = {}
-            let initializeUpdatableLabelInputIsConfiremed = {}
             //Make the initializer of the formValues object
             formFieldsPropertiesList.forEach((field) => {
                 if(field.Type() === "LabelInput"){
-                    initiateFormValue[field.DataLayer()] = '';
+                    initiateFormValue[field.DataLayer()] = field.PlaceHolder();
                 }
                 if(field.Type() === "NotUpdatableLabelInput"){
                     initiateFormValue[field.DataLayer()] = field.PlaceHolder();
                 }
                 if(field.Type() === "UpdatableLabelInput"){
                     initiateFormValue[field.DataLayer()] = field.PlaceHolder();
-                    initializeUpdatableLabelInputIsConfiremed[field.DataLayer()]= true
 
                 }
                 if(field.Type() === "DropDownList"){
@@ -38,7 +45,6 @@ const FormMaker = (formFieldsPropertiesList, postURL) => {
                 }
             })
             setFormValues(initiateFormValue)
-            setUpdatableLabelInputIsConfiremed(initializeUpdatableLabelInputIsConfiremed)
         },
         [formFieldsPropertiesList]
     )
@@ -128,13 +134,29 @@ const FormMaker = (formFieldsPropertiesList, postURL) => {
                 className="btn btn-primary"
                 type="button"
                 disabled = {isSubmitButtonDisabled}
-                onClick={()=>DoubleCheckFormValues(formValues, setDoubleCheck, setIsSubmitButtonDisabled, postURL)}
+                // onClick={()=>DoubleCheckFormValues(formValues, setDoubleCheck, setIsSubmitButtonDisabled, postURL)}
+                onClick={()=>populatePopup()}
             >
                 {"Submit"}
             </button>
         </div>
     
     formComponents.push(submitButton)
+
+    const populatePopup = ()=>{
+        setDoubleCheck(
+            <div className="modal">
+                <div className="modal-content">
+                    <p>
+                        Are you sure you want to proceed?
+                    </p>
+                    <button>
+                        Cancel
+                    </button><button>Confirm</button>
+                </div>
+            </div>
+        )
+    }
 
     return(
         <div>

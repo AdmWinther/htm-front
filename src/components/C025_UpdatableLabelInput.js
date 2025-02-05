@@ -21,7 +21,7 @@ function UpdatableLabelInput({
     let label = fieldProperties.Label()
 
     const handleClickEdit = ()=>{
-        //console.log("remember, the state is:", theState)
+        console.log("Before Edit the state is:", theState)
         isFormDisabled(true)
         setFieldReadOnly(false)
         setIsEditButtonDisabled(true)
@@ -30,6 +30,7 @@ function UpdatableLabelInput({
     }
 
     const handleClickConfirm = ()=>{
+        console.log("Confirm clicked, the state is:", theState)
         //We need to trim after CONFIRM to make sure all excess blanks at the end are removed.
         setFieldValue(fieldValue.trim())
         setStateFunction({...theState, [fieldProperties.DataLayer()]:fieldValue.trim()})

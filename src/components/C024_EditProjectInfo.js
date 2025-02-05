@@ -39,7 +39,7 @@ function EditProjectInfo({projectId, previousPage}) {
 
             setFormBluePrint(formFieldPropertiesList)
         })
-    },[])
+    },[projectId])
     
     let updateProjectPropUrl = process.env.REACT_APP_BACKEND_URL+process.env.REACT_APP_ENDPOINT_GET_PROJECT_Name+projectId
     return(
